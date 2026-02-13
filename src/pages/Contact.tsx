@@ -7,18 +7,32 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    const formData = new FormData(e.currentTarget);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => { data[key] = value.toString(); });
+
+    try {
+      const { error } = await supabase.functions.invoke("send-notification", {
+        body: { type: "contact", data },
+      });
+      if (error) throw error;
       toast.success("Message sent! We'll get back to you shortly.");
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

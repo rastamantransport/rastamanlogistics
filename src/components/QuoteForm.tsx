@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface QuoteFormProps {
   compact?: boolean;
@@ -13,15 +14,27 @@ interface QuoteFormProps {
 const QuoteForm = ({ compact = false }: QuoteFormProps) => {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submission
-    setTimeout(() => {
-      setLoading(false);
+
+    const formData = new FormData(e.currentTarget);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => { data[key] = value.toString(); });
+
+    try {
+      const { error } = await supabase.functions.invoke("send-notification", {
+        body: { type: "quote", data },
+      });
+      if (error) throw error;
       toast.success("Quote request submitted! We'll contact you shortly.");
       (e.target as HTMLFormElement).reset();
-    }, 1200);
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (compact) {
