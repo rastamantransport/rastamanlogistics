@@ -41,9 +41,9 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+1234567890" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+          <a href="tel:+19165193588" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
             <Phone className="w-4 h-4" />
-            (123) 456-7890
+            (916) 519-3588
           </a>
           <Link to="/quote">
             <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
@@ -78,9 +78,9 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <a href="tel:+1234567890" className="flex items-center gap-2 text-sm text-primary font-medium py-2">
+            <a href="tel:+19165193588" className="flex items-center gap-2 text-sm text-primary font-medium py-2">
               <Phone className="w-4 h-4" />
-              (123) 456-7890
+              (916) 519-3588
             </a>
             <Link to="/quote" onClick={() => setMobileOpen(false)}>
               <Button className="w-full bg-gradient-gold text-primary-foreground font-semibold">

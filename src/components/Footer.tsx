@@ -45,7 +45,7 @@ const Footer = () => (
           <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Contact</h4>
           <ul className="space-y-3">
             <li className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Phone className="w-4 h-4 text-primary" /> (123) 456-7890
+              <Phone className="w-4 h-4 text-primary" /> (916) 519-3588
             </li>
             <li className="flex items-center gap-2 text-sm text-muted-foreground">
               <Mail className="w-4 h-4 text-primary" /> info@rastamanlogistics.com

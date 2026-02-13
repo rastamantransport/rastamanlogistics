@@ -83,7 +83,7 @@ const Contact = () => {
                 <h2 className="text-xl font-bold font-display text-foreground mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   {[
-                    { icon: Phone, label: "Phone", value: "(123) 456-7890", href: "tel:+1234567890" },
+                    { icon: Phone, label: "Phone", value: "(916) 519-3588", href: "tel:+19165193588" },
                     { icon: Mail, label: "Email", value: "info@rastamanlogistics.com", href: "mailto:info@rastamanlogistics.com" },
                     { icon: MapPin, label: "Service Area", value: "Nationwide — All 50 States" },
                     { icon: Clock, label: "Hours", value: "Mon–Fri: 8AM–8PM EST\nSat: 9AM–5PM EST" },
