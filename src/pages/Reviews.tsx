@@ -21,6 +21,7 @@ const Reviews = () => {
       const { data, error } = await supabase
         .from("reviews")
         .select("*")
+        .eq("approved", true)
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data;
