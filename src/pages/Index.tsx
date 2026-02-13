@@ -43,7 +43,7 @@ const Index = () => {
                   Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <a href="tel:+1234567890">
+              <a href="tel:+19165193588">
                 <Button size="lg" variant="outline" className="border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground">
                   <Phone className="mr-2 w-4 h-4" /> Call Now
                 </Button>
@@ -143,9 +143,9 @@ const Index = () => {
                 Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <a href="tel:+1234567890">
+            <a href="tel:+19165193588">
               <Button size="lg" variant="outline" className="border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground">
-                <Phone className="mr-2 w-4 h-4" /> (123) 456-7890
+                <Phone className="mr-2 w-4 h-4" /> (916) 519-3588
               </Button>
             </a>
           </div>
