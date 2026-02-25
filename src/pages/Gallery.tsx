@@ -4,9 +4,11 @@ import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg";
+import ferrari308gts from "@/assets/gallery-ferrari-308-gts.jpg";
 
 const galleryImages = [
   { src: porscheGt3rs, alt: "White Porsche 911 GT3 RS being loaded for secure supercar shipping from Bay Area California to Las Vegas Nevada for SEMA show", caption: "Bay Area, CA → Las Vegas, NV • Porsche 911 GT3 RS • Enclosed supercar transport to SEMA 2026" },
+  { src: ferrari308gts, alt: "Red Ferrari 308 GTS after successful delivery from San Diego California to the Washington D.C. area — professional exotic car shipping", caption: "San Diego, CA → Washington, D.C. Area • Ferrari 308 GTS • Cross-country supercar transport" },
 ];
 
 const Gallery = () => {
