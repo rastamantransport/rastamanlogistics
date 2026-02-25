@@ -3,19 +3,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import heroTransport from "@/assets/hero-transport.jpg";
-import openTransport from "@/assets/open-transport.jpg";
-import enclosedTransport from "@/assets/enclosed-transport.jpg";
 import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg";
 
 const galleryImages = [
   { src: porscheGt3rs, alt: "White Porsche 911 GT3 RS being loaded for secure supercar shipping from Bay Area California to Las Vegas Nevada for SEMA show", caption: "Bay Area, CA → Las Vegas, NV • Porsche 911 GT3 RS • Enclosed supercar transport to SEMA 2026" },
-  { src: heroTransport, alt: "Vehicle loaded on carrier trailer", caption: "Cross-country auto transport" },
-  { src: openTransport, alt: "Open car transport carrier", caption: "Open carrier shipping" },
-  { src: enclosedTransport, alt: "Enclosed vehicle transport", caption: "Enclosed premium transport" },
-  { src: heroTransport, alt: "Car hauler on highway", caption: "Nationwide delivery" },
-  { src: openTransport, alt: "Multi-car carrier loading", caption: "Multi-vehicle shipment" },
-  { src: enclosedTransport, alt: "Protected vehicle shipping", caption: "Luxury vehicle protection" },
 ];
 
 const Gallery = () => {
