@@ -10,6 +10,7 @@ import fordModelA from "@/assets/gallery-ford-model-a-woody.jpg";
 import acuraNsx from "@/assets/gallery-acura-nsx.jpg";
 import f1Replica from "@/assets/gallery-f1-replica-art-car.jpg";
 import teslaRoadster from "@/assets/gallery-tesla-roadster.jpg";
+import vintagePurple from "@/assets/gallery-vintage-purple-classic.jpg";
 
 const galleryImages = [
   { src: porscheGt3rs, alt: "White Porsche 911 GT3 RS being loaded for secure supercar shipping from Bay Area California to Las Vegas Nevada for SEMA show", caption: "Bay Area, CA → Las Vegas, NV • Porsche 911 GT3 RS • Enclosed supercar transport to SEMA 2026" },
@@ -19,6 +20,7 @@ const galleryImages = [
   { src: acuraNsx, alt: "Orange Acura NSX loaded for secure supercar shipping from Atlanta Georgia to Bay Area California — professional enclosed transport", caption: "Atlanta, GA → Bay Area, CA • February 2026 • Acura NSX • Door-to-door enclosed supercar shipping" },
   { src: f1Replica, alt: "Custom F1 replica race car sculpture loaded for secure enclosed shipping from Las Vegas Nevada to Tampa Florida", caption: "Las Vegas, NV → Tampa, FL • F1 Replica Art Car • Specialty show-car transport" },
   { src: teslaRoadster, alt: "Maroon Tesla Roadster with scissor doors loaded for professional exotic EV shipping from Scottsdale Arizona to Miami Florida", caption: "Scottsdale, AZ → Miami, FL • Tesla Roadster • Enclosed high-value EV transport" },
+  { src: vintagePurple, alt: "Rare vintage purple classic car from San Francisco museum safely loaded for long-distance enclosed transport to Miami Florida", caption: "San Francisco, CA → Miami, FL • Vintage Museum Classic • White-glove collector car shipping" },
 ];
 
 const Gallery = () => {
