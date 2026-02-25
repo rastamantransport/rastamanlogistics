@@ -38,7 +38,7 @@ const About = () => (
                 Rastaman Logistics LLC is a licensed auto transport broker committed to providing safe, efficient, and reliable vehicle shipping solutions across the United States. We proudly serve individuals, dealerships, collectors, and businesses with the same high level of professionalism, precision, and care.
               </p>
               <p>
-                Our roots in the auto transport industry go back to 2015, when we began transporting vehicles and building hands-on experience in carrier operations, vehicle handling, and nationwide logistics. In 2021, we founded Rastaman Transport, our own carrier company, allowing us to operate directly in the field and better understand every aspect of the shipping process.
+                Our roots in the auto transport industry go back to 2015, when we began transporting vehicles and building hands-on experience in carrier operations, vehicle handling, and nationwide logistics. In 2021, we founded <a href="https://rastamantransport.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Rastaman Transport</a>, our own carrier company, allowing us to operate directly in the field and better understand every aspect of the shipping process.
               </p>
               <p>
                 Today, with the launch of Rastaman Logistics LLC, we are expanding into brokerage services to better serve our repeat clients and growing customer base. By combining real carrier experience with a trusted nationwide network of thoroughly vetted and insured transport partners, we provide reliable solutions tailored to each customer's needs.
