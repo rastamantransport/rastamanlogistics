@@ -6,8 +6,10 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import heroTransport from "@/assets/hero-transport.jpg";
 import openTransport from "@/assets/open-transport.jpg";
 import enclosedTransport from "@/assets/enclosed-transport.jpg";
+import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg";
 
 const galleryImages = [
+  { src: porscheGt3rs, alt: "Porsche GT3 RS loading into enclosed trailer", caption: "Porsche GT3 RS enclosed transport" },
   { src: heroTransport, alt: "Vehicle loaded on carrier trailer", caption: "Cross-country auto transport" },
   { src: openTransport, alt: "Open car transport carrier", caption: "Open carrier shipping" },
   { src: enclosedTransport, alt: "Enclosed vehicle transport", caption: "Enclosed premium transport" },
