@@ -9,7 +9,7 @@ import enclosedTransport from "@/assets/enclosed-transport.jpg";
 import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg";
 
 const galleryImages = [
-  { src: porscheGt3rs, alt: "Porsche GT3 RS loading into enclosed trailer", caption: "Porsche GT3 RS enclosed transport" },
+  { src: porscheGt3rs, alt: "White Porsche 911 GT3 RS being loaded for secure supercar shipping from Bay Area California to Las Vegas Nevada for SEMA show", caption: "Bay Area, CA → Las Vegas, NV • Porsche 911 GT3 RS • Enclosed supercar transport to SEMA 2026" },
   { src: heroTransport, alt: "Vehicle loaded on carrier trailer", caption: "Cross-country auto transport" },
   { src: openTransport, alt: "Open car transport carrier", caption: "Open carrier shipping" },
   { src: enclosedTransport, alt: "Enclosed vehicle transport", caption: "Enclosed premium transport" },
