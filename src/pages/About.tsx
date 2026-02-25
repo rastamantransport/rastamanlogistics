@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Users, Truck, HeartHandshake, ArrowRight } from "lucide-react";
+import { Shield, Users, Truck, HeartHandshake, ArrowRight, Globe, Wrench, Zap, MessageSquare, ShieldCheck, Settings, Scale, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -9,6 +9,17 @@ const values = [
   { icon: Users, title: "Customer Focus", desc: "Dedicated support from quote to delivery. We treat every shipment like it's our own vehicle." },
   { icon: Truck, title: "Nationwide Reach", desc: "Our extensive carrier network covers all 50 states with reliable, timely service." },
   { icon: HeartHandshake, title: "Integrity", desc: "Transparent pricing, honest timelines, and clear communication — always." },
+];
+
+const whyChoose = [
+  { icon: Globe, title: "Nationwide Coverage, Reliable Capacity", desc: "With access to a large network of vetted and insured carriers across the United States, we can move vehicles quickly and efficiently on virtually any route. From single units to multi-vehicle shipments, we scale to meet your needs." },
+  { icon: Wrench, title: "Built by Transporters, Not Just Brokers", desc: "Our foundation as a carrier since 2015 gives us real operational knowledge. We understand dispatching, routing, equipment, and timing — which means fewer surprises and smoother deliveries for our customers." },
+  { icon: Zap, title: "Fast, Efficient Dispatch", desc: "We work to assign qualified carriers quickly, minimizing wait times and keeping your vehicles moving. Our strong relationships with drivers and carriers help us secure capacity even on busy lanes." },
+  { icon: MessageSquare, title: "Transparent Communication", desc: "Clear updates from pickup to delivery. We stay reachable, responsive, and proactive so you always know the status of your shipment." },
+  { icon: ShieldCheck, title: "Fully Vetted & Insured Carrier Network", desc: "Every carrier in our network is carefully screened for active authority, insurance, and safety standards. We prioritize reliability and professionalism on every load." },
+  { icon: Settings, title: "Flexible Solutions for Every Customer", desc: "We support individuals, dealerships, auctions, fleet managers, and businesses — whether you need open transport, enclosed shipping, or recurring volume moves." },
+  { icon: Scale, title: "Compliance & Professional Standards", desc: "As an FMCSA-registered broker, we operate with full compliance, transparency, and accountability." },
+  { icon: Handshake, title: "Long-Term Partnership Approach", desc: "Many of our customers are repeat clients. We focus on building lasting relationships through consistent service, fair pricing, and dependable results." },
 ];
 
 const About = () => (
@@ -43,6 +54,25 @@ const About = () => (
                 <p className="text-sm text-muted-foreground">{v.desc}</p>
               </div>
             ))}
+          </div>
+
+          {/* Why Choose Section */}
+          <div className="mt-20 max-w-5xl mx-auto">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3 text-center">Why Choose Us</p>
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-10 text-center">
+              Why Choose <span className="text-gradient-gold">Rastaman Logistics</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {whyChoose.map((item) => (
+                <div key={item.title} className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors flex gap-4">
+                  <item.icon className="w-7 h-7 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="text-center mt-16">
