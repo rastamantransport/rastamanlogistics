@@ -35,13 +35,16 @@ const About = () => (
             </h1>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Rastaman Logistics LLC is a licensed auto transport broker committed to providing safe, efficient, and affordable vehicle shipping solutions across the United States. We serve individuals, dealerships, and businesses with the same level of professionalism and care.
+                Rastaman Logistics LLC is a licensed auto transport broker committed to providing safe, efficient, and reliable vehicle shipping solutions across the United States. We proudly serve individuals, dealerships, collectors, and businesses with the same high level of professionalism, precision, and care.
               </p>
               <p>
-                Our mission is simple: connect customers with the best carriers in the industry while delivering an exceptional experience from the first call to final delivery. We've built a nationwide network of thoroughly vetted, insured carriers so you can ship your vehicle with complete confidence.
+                Our roots in the auto transport industry go back to 2015, when we began transporting vehicles and building hands-on experience in carrier operations, vehicle handling, and nationwide logistics. In 2021, we founded Rastaman Transport, our own carrier company, allowing us to operate directly in the field and better understand every aspect of the shipping process.
               </p>
               <p>
-                As a FMCSA-registered broker, we uphold the highest standards of compliance, transparency, and customer service. Whether you're shipping a family sedan across state lines or a classic car across the country, we handle the logistics so you don't have to.
+                Today, with the launch of Rastaman Logistics LLC, we are expanding into brokerage services to better serve our repeat clients and growing customer base. By combining real carrier experience with a trusted nationwide network of thoroughly vetted and insured transport partners, we provide reliable solutions tailored to each customer's needs.
+              </p>
+              <p>
+                As an FMCSA-registered broker, we uphold the highest standards of compliance, transparency, and customer service. Whether you're shipping a daily driver, luxury vehicle, classic car, or dealership inventory across the country, we manage the logistics so you can ship with complete confidence.
               </p>
             </div>
           </div>
