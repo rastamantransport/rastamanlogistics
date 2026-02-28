@@ -53,7 +53,7 @@ const About = () => (
             {values.map((v) => (
               <div key={v.title} className="bg-card border border-border rounded-xl p-6 text-center hover:border-primary/30 transition-colors">
                 <v.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="text-base font-semibold text-foreground mb-2">{v.title}</h3>
+                <h2 className="text-base font-semibold text-foreground mb-2">{v.title}</h2>
                 <p className="text-sm text-muted-foreground">{v.desc}</p>
               </div>
             ))}

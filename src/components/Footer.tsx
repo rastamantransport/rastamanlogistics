@@ -6,16 +6,16 @@ const Footer = () => (
     <div className="container mx-auto px-4 lg:px-8 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <h3 className="text-lg font-bold font-display text-foreground mb-4">
+          <p className="text-lg font-bold font-display text-foreground mb-4">
             RASTAMAN<span className="text-primary"> LOGISTICS</span>
-          </h3>
+          </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Licensed auto transport broker specializing in safe, reliable nationwide vehicle shipping across the United States.
           </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Services</h4>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Services</p>
           <ul className="space-y-2">
             {["Open Transport", "Enclosed Transport", "Dealer Transport", "Door-to-Door Delivery"].map((s) => (
               <li key={s}>
@@ -26,7 +26,7 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Company</h4>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Company</p>
           <ul className="space-y-2">
             {[
               { label: "About Us", path: "/about" },
@@ -42,7 +42,7 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Contact</h4>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Contact</p>
           <ul className="space-y-3">
             <li className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="w-4 h-4 text-primary" /> (916) 519-3588
