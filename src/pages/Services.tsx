@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Truck, Shield, Package, Building2, MapPin, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import openTransport from "@/assets/open-transport.jpg";
-import enclosedTransport from "@/assets/enclosed-transport.jpg";
+import openTransport from "@/assets/open-transport.jpg?format=webp";
+import enclosedTransport from "@/assets/enclosed-transport.jpg?format=webp";
 
 const services = [
   {

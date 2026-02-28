@@ -7,7 +7,7 @@ import QuoteForm from "@/components/QuoteForm";
 import TrustBadges from "@/components/TrustBadges";
 import TestimonialSection from "@/components/TestimonialSection";
 import FAQSection from "@/components/FAQSection";
-import heroImage from "@/assets/hero-transport.jpg";
+import heroImage from "@/assets/hero-transport.jpg?format=webp";
 
 const steps = [
   { icon: "01", title: "Request a Quote", desc: "Fill out our quick form with your vehicle and route details." },
