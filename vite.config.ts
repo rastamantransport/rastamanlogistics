@@ -15,11 +15,27 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), imagetools(), mode === "development" && componentTagger()].filter(Boolean),
   build: {
+    target: "esnext",
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-          ui: ["@radix-ui/react-dialog", "@radix-ui/react-accordion", "@radix-ui/react-toast", "@radix-ui/react-tooltip"],
+          "vendor-react": ["react", "react-dom"],
+          "vendor-router": ["react-router-dom"],
+          "vendor-query": ["@tanstack/react-query"],
+          "ui-primitives": [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-toast",
+            "@radix-ui/react-tooltip",
+            "@radix-ui/react-popover",
+          ],
+          "ui-form": [
+            "@radix-ui/react-label",
+            "@radix-ui/react-select",
+            "@radix-ui/react-checkbox",
+            "@radix-ui/react-radio-group",
+          ],
         },
       },
     },
