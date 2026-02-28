@@ -55,6 +55,7 @@ const Gallery = () => {
                       alt={img.alt}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                   </AspectRatio>
                   <div className="p-3 text-left">
@@ -75,6 +76,7 @@ const Gallery = () => {
               src={galleryImages[selected].src}
               alt={galleryImages[selected].alt}
               className="w-full rounded-lg object-contain max-h-[80vh]"
+              decoding="async"
             />
           )}
         </DialogContent>
