@@ -24,7 +24,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center pt-16">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Professional auto transport carrier truck shipping vehicles nationwide across the United States — Rastaman Logistics enclosed and open car shipping service" className="w-full h-full object-cover" fetchPriority="high" decoding="async" />
+          <img src={heroImage} alt="Professional auto transport carrier truck shipping vehicles nationwide across the United States — Rastaman Logistics enclosed and open car shipping service" className="w-full h-full object-cover" fetchPriority="high" decoding="async" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
         </div>
 
