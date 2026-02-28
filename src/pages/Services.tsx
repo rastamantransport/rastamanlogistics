@@ -63,7 +63,7 @@ const Services = () => (
                 <div className={`grid grid-cols-1 ${s.image ? 'lg:grid-cols-2' : ''}`}>
                   {s.image && (
                     <div className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                      <img src={s.image} alt={s.title} className="w-full h-64 lg:h-full object-cover" />
+                      <img src={s.image} alt={s.title} className="w-full h-64 lg:h-full object-cover" loading="lazy" decoding="async" />
                     </div>
                   )}
                   <div className="p-6 md:p-8 flex flex-col justify-center">
