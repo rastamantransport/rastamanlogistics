@@ -23,6 +23,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const queryClient = new QueryClient();
 
 const App = () => (
+  <HelmetProvider>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Suspense fallback={null}>
@@ -30,7 +31,6 @@ const App = () => (
         <Sonner />
       </Suspense>
       <BrowserRouter>
-        <CanonicalTag />
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
