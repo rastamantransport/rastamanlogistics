@@ -24,21 +24,35 @@ const MAX_MESSAGE_LENGTH = 2000;
 const truncate = (s?: string | null, max = MAX_FIELD_LENGTH): string =>
   (s ?? "").slice(0, max);
 
-// Simple in-memory rate limiter (per isolate lifetime)
-const rateLimitMap = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
-const RATE_LIMIT_MAX = 5; // max 5 requests per minute per IP
+// Persistent rate limiting via Supabase
+const RATE_LIMIT_WINDOW_SECONDS = 60;
+const RATE_LIMIT_MAX = 5;
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const timestamps = rateLimitMap.get(ip) ?? [];
-  const recent = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
-  if (recent.length >= RATE_LIMIT_MAX) {
-    rateLimitMap.set(ip, recent);
+async function isRateLimited(supabaseAdmin: ReturnType<typeof createClient>, ip: string): Promise<boolean> {
+  const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_SECONDS * 1000).toISOString();
+
+  // Count recent requests from this IP
+  const { count, error } = await supabaseAdmin
+    .from("rate_limit_log")
+    .select("id", { count: "exact", head: true })
+    .eq("ip_address", ip)
+    .gte("created_at", windowStart);
+
+  if (error) {
+    console.error("Rate limit check error:", error);
+    return false; // fail open to avoid blocking legitimate requests
+  }
+
+  if ((count ?? 0) >= RATE_LIMIT_MAX) {
     return true;
   }
-  recent.push(now);
-  rateLimitMap.set(ip, recent);
+
+  // Log this request
+  await supabaseAdmin.from("rate_limit_log").insert({ ip_address: ip });
+
+  // Opportunistic cleanup of old entries
+  await supabaseAdmin.rpc("cleanup_rate_limit_log").catch(() => {});
+
   return false;
 }
 
@@ -48,13 +62,19 @@ serve(async (req) => {
   }
 
   try {
+    // Create service-role client for rate limiting
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
     // Rate limiting by IP
     const clientIp =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       req.headers.get("cf-connecting-ip") ||
       "unknown";
 
-    if (isRateLimited(clientIp)) {
+    if (await isRateLimited(supabaseAdmin, clientIp)) {
       return new Response(
         JSON.stringify({ error: "Too many requests. Please try again later." }),
         { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
