@@ -7,7 +7,10 @@ import QuoteForm from "@/components/QuoteForm";
 import TrustBadges from "@/components/TrustBadges";
 import TestimonialSection from "@/components/TestimonialSection";
 import FAQSection from "@/components/FAQSection";
+import SEOHead from "@/components/SEOHead";
 import heroImage from "@/assets/hero-transport.jpg?format=webp";
+
+const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/2f576744-3922-47ac-84f2-7898df6cec06?Expires=1772061836&GoogleAccessId=go-api-on-aws%40gpt-engineer-390607.iam.gserviceaccount.com&Signature=KYFfLRLgoG4fO6iav%2FjJVBaVifN3cLBia%2Fjj8j4Be%2FKcF1Uy%2F0xoqxsFyu%2Fr3jGDJ6g84ESVygBf1wHH1mPJDoFHqGhW6zpD56zJQq7Q2cMtT%2Bzn807JBisT0bjHQU1kXahJU5RWvA4VCNkcSZtUaABOM912tivaIXfzijgEESpibrA3OvgK6VFh0Um8561yVPhVdupA24KFq3KipkiB%2FzjGnsVlU1zTPSTjoY3XrqNvCczfvK9oTEOaMM3uwDRbdFPwiAioKQLJGc6bkmBXq%2B1c3D4QpPzecvYxA4ClwxvrEuc1A4Z0%2FLJuBR5xbLTAIF1FKTY6xunM5iPsoRSZaA%3D%3D";
 
 const steps = [
   { icon: "01", title: "Request a Quote", desc: "Fill out our quick form with your vehicle and route details." },
