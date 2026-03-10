@@ -22,6 +22,12 @@ const steps = [
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Rastaman Logistics LLC | Nationwide Vehicle Shipping & Auto Transport"
+        description="Licensed auto transport broker offering nationwide vehicle shipping across the United States. Open & enclosed car transport, door-to-door delivery. Get a free quote today."
+        canonical="https://rastamanlogistics.com"
+        ogImage={OG_IMAGE}
+      />
       <Navbar />
 
       {/* Hero */}
