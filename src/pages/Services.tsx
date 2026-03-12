@@ -8,18 +8,18 @@ import enclosedTransport from "@/assets/enclosed-transport.jpg?format=webp";
 
 const services = [
   {
-    icon: Truck,
-    title: "Open Car Transport",
-    desc: "The most popular and affordable option for vehicle shipping. Your car is loaded onto an open multi-car carrier — the same method used by dealerships and manufacturers nationwide.",
-    benefits: ["Most cost-effective option", "Widely available routes", "Ideal for standard vehicles"],
-    image: openTransport,
-  },
-  {
     icon: Shield,
     title: "Enclosed Car Transport",
     desc: "Premium protection for high-value, luxury, classic, and exotic vehicles. Your car travels inside a fully enclosed trailer, shielded from weather and road debris.",
     benefits: ["Maximum vehicle protection", "Climate-controlled options", "Perfect for luxury & classics"],
     image: enclosedTransport,
+  },
+  {
+    icon: Truck,
+    title: "Open Car Transport",
+    desc: "The most popular and affordable option for vehicle shipping. Your car is loaded onto an open multi-car carrier — the same method used by dealerships and manufacturers nationwide.",
+    benefits: ["Most cost-effective option", "Widely available routes", "Ideal for standard vehicles"],
+    image: openTransport,
   },
   {
     icon: Building2,
