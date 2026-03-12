@@ -29,7 +29,7 @@ export function render(url: string) {
   const queryClient = new QueryClient();
 
   const html = renderToString(
-    <HelmetProvider context={helmetContext}>
+    <HelmetProvider context={helmetContext as any}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <StaticRouter location={url}>
