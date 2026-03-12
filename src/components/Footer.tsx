@@ -62,7 +62,7 @@ const Footer = () => (
           © {new Date().getFullYear()} Rastaman Logistics LLC. All rights reserved. Licensed & Insured.
         </p>
         <p className="text-xs text-muted-foreground">
-          USDOT & FMCSA Registered Auto Transport Broker
+          Licensed & Insured — <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnap&query_param=USDOT&query_string=4536031" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">USDOT-4536031</a> | MC-1799328
         </p>
       </div>
     </div>
