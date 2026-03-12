@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
+import SEOHead from "@/components/SEOHead";
 import { Shield, CheckCircle } from "lucide-react";
 
 const Quote = () => (
