@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Shield, Users, Truck, HeartHandshake, ArrowRight, Globe, Wrench, Zap, MessageSquare, ShieldCheck, Settings, Scale, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const values = [
   { icon: Shield, title: "Safety First", desc: "Every carrier is fully licensed, insured, and vetted. Your vehicle's safety is non-negotiable." },
