@@ -97,7 +97,7 @@ const Index = () => {
               Why Choose Rastaman Logistics
             </h2>
             <p className="text-sm text-muted-foreground">
-              <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnap&query_param=USDOT&query_string=4536031" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">USDOT-4536031</a> | MC-1799328
+              <a href="https://safer.fmcsa.dot.gov/query.asp?query_param=USDOT&query_string=4536031&query_type=queryCarrierSnapshot&searchtype=ANY" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">USDOT #4536031</a> | MC-1799328
             </p>
           </div>
 
