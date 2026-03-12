@@ -39,11 +39,11 @@ const Index = () => {
 
         <div className="relative container mx-auto px-4 lg:px-8 py-20">
           <div className="max-w-2xl">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-4">Licensed Auto Transport Broker</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-foreground leading-tight mb-6">
+            <p className="text-[hsl(18,100%,60%)] font-semibold text-sm uppercase tracking-widest mb-4">Licensed Auto Transport Broker</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-white leading-tight mb-6">
               Nationwide Vehicle Shipping You Can <span className="text-gradient-gold">Trust</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-white/75 mb-8 max-w-lg leading-relaxed">
               Safe, reliable auto transport across all 50 states. Get connected with vetted carriers and competitive rates — fast.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
