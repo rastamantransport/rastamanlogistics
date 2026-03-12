@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import SEOHead from "@/components/SEOHead";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg?format=webp";
 import ferrari308gts from "@/assets/gallery-ferrari-308-gts.jpg?format=webp";
