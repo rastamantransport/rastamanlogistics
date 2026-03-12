@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Truck, Shield, Package, Building2, MapPin, ArrowRight } from "lucide-react";
+import { Truck, Shield, Package, Building2, MapPin, ArrowRight, Bike } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import openTransport from "@/assets/open-transport.jpg?format=webp";
 import enclosedTransport from "@/assets/enclosed-transport.jpg?format=webp";
+import motorcycleTransport from "@/assets/motorcycle-transport.jpg?format=webp";
 
 const services = [
   {
@@ -20,6 +21,13 @@ const services = [
     desc: "The most popular and affordable option for vehicle shipping. Your car is loaded onto an open multi-car carrier — the same method used by dealerships and manufacturers nationwide.",
     benefits: ["Most cost-effective option", "Widely available routes", "Ideal for standard vehicles"],
     image: openTransport,
+  },
+  {
+    icon: Bike,
+    title: "Motorcycle Transport",
+    desc: "Secure and professional motorcycle transport nationwide. Whether you're shipping a single bike, multiple motorcycles, or a custom trike, we connect you with experienced carriers who specialize in safe two- and three-wheel transport. Your motorcycle is carefully secured using professional tie-down systems and transported in enclosed or open trailers depending on your needs.",
+    benefits: ["Harleys, sport bikes, vintage & trikes", "Professional tie-down systems", "Enclosed or open trailer options"],
+    image: motorcycleTransport,
   },
   {
     icon: Building2,
