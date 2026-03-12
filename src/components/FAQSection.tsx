@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Helmet } from "react-helmet-async";
 
 const faqs = [
   {
@@ -27,8 +28,24 @@ const faqs = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+};
+
 const FAQSection = () => (
   <section className="py-20 bg-card">
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+    </Helmet>
     <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground mb-3">
