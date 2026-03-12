@@ -21,12 +21,7 @@ import Reviews from "./pages/Reviews";
 import NotFound from "./pages/NotFound";
 
 interface HelmetContextData {
-  helmet?: {
-    title: { toString(): string };
-    meta: { toString(): string };
-    link: { toString(): string };
-    script: { toString(): string };
-  };
+  helmet?: Record<string, { toString(): string }>;
 }
 
 export function render(url: string) {
