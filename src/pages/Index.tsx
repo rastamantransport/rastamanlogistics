@@ -106,7 +106,7 @@ const Index = () => {
               { icon: Shield, title: "Vetted Carriers Only", desc: "Every carrier is fully insured, licensed, and verified before being assigned to your shipment." },
               { icon: Truck, title: "Door-to-Door Service", desc: "We pick up and deliver your vehicle right to your specified locations — no terminals, no hassle." },
               { icon: Clock, title: "Fast & Transparent", desc: "Get a quote in minutes with clear pricing. No hidden fees, no surprises — just reliable service." },
-              { icon: Shield, title: "FMCSA Licensed & Verified", desc: "Rastaman Logistics LLC is a federally registered auto transport broker with the Federal Motor Carrier Safety Administration (FMCSA). Our licensing and compliance status can be verified anytime through the official FMCSA database, giving our customers complete confidence in who they are working with." },
+              { icon: Shield, title: "FMCSA Licensed & Registered Broker", desc: "Our credentials can be verified directly through the official FMCSA database." },
             ].map((item) => (
               <div key={item.title} className="flex flex-col items-center text-center p-6">
                 <item.icon className="w-10 h-10 text-primary mb-4" />
