@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import SEOHead from "@/components/SEOHead";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg?format=webp";
 import ferrari308gts from "@/assets/gallery-ferrari-308-gts.jpg?format=webp";
@@ -28,6 +29,11 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Auto Transport Gallery | Vehicles We've Shipped Nationwide"
+        description="Browse photos of luxury, classic, and exotic vehicles shipped by Rastaman Logistics. Porsche, Ferrari, Tesla, and more — safely transported coast to coast."
+        canonical="https://rastamanlogistics.com/gallery"
+      />
       <Navbar />
       <main className="pt-16">
         <section className="py-20">

@@ -28,6 +28,7 @@ const SEOHead = ({
     <meta name="robots" content={robots} />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />

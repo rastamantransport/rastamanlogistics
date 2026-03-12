@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FileText, Users, ClipboardCheck, Truck, CheckCircle, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const steps = [
   {
@@ -39,6 +40,11 @@ const steps = [
 
 const HowItWorks = () => (
   <div className="min-h-screen bg-background">
+    <SEOHead
+      title="How Car Shipping Works | 5-Step Auto Transport Process"
+      description="Learn how vehicle shipping works in 5 simple steps: get a quote, carrier assignment, pickup, safe transport, and delivery. Stress-free auto transport nationwide."
+      canonical="https://rastamanlogistics.com/how-it-works"
+    />
     <Navbar />
     <main className="pt-16">
       <section className="py-20">

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Shield, Users, Truck, HeartHandshake, ArrowRight, Globe, Wrench, Zap, MessageSquare, ShieldCheck, Settings, Scale, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const values = [
   { icon: Shield, title: "Safety First", desc: "Every carrier is fully licensed, insured, and vetted. Your vehicle's safety is non-negotiable." },
@@ -24,6 +25,11 @@ const whyChoose = [
 
 const About = () => (
   <div className="min-h-screen bg-background">
+    <SEOHead
+      title="About Rastaman Logistics | Licensed Auto Transport Broker Since 2015"
+      description="Learn about Rastaman Logistics LLC — an FMCSA-licensed auto transport broker with carrier roots since 2015. Safe, reliable nationwide vehicle shipping you can trust."
+      canonical="https://rastamanlogistics.com/about"
+    />
     <Navbar />
     <main className="pt-16">
       <section className="py-20">
