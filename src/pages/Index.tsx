@@ -144,10 +144,10 @@ const Index = () => {
       {/* CTA */}
       <section className="py-20 bg-gradient-dark">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-4">
             Ready to Ship Your Vehicle?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+          <p className="text-white/65 mb-8 max-w-md mx-auto">
             Get a free, no-obligation quote in minutes. Nationwide coverage, competitive rates.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -157,7 +157,7 @@ const Index = () => {
               </Button>
             </Link>
             <a href="tel:+19165193588">
-              <Button size="lg" variant="outline" className="border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground">
+              <Button size="lg" variant="outline" className="border-white/40 text-white font-semibold hover:bg-white/10">
                 <Phone className="mr-2 w-4 h-4" /> (916) 519-3588
               </Button>
             </a>
