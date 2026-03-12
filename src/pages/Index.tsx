@@ -106,7 +106,7 @@ const Index = () => {
               { icon: Shield, title: "Vetted Carriers Only", desc: "Every carrier is fully insured, licensed, and verified before being assigned to your shipment." },
               { icon: Truck, title: "Door-to-Door Service", desc: "We pick up and deliver your vehicle right to your specified locations — no terminals, no hassle." },
               { icon: Clock, title: "Fast & Transparent", desc: "Get a quote in minutes with clear pricing. No hidden fees, no surprises — just reliable service." },
-              { icon: Shield, title: "FMCSA Licensed & Registered Broker", desc: "Our credentials can be verified directly through the official FMCSA database." },
+              { icon: Shield, title: "FMCSA Licensed & Registered Broker", desc: <>Our credentials can be verified directly through the official <a href="https://safer.fmcsa.dot.gov/query.asp?query_param=USDOT&query_string=4536031&query_type=queryCarrierSnapshot&searchtype=ANY" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">FMCSA database</a>.</> },
             ].map((item) => (
               <div key={item.title} className="flex flex-col items-center text-center p-6">
                 <item.icon className="w-10 h-10 text-primary mb-4" />
