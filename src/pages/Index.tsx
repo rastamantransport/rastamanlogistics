@@ -34,16 +34,16 @@ const Index = () => {
       <section className="relative min-h-[90vh] flex items-center pt-16">
         <div className="absolute inset-0">
           <img src={heroImage} alt="Professional auto transport carrier truck shipping vehicles nationwide across the United States — Rastaman Logistics enclosed and open car shipping service" className="w-full h-full object-cover" fetchPriority="high" decoding="async" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(29,22%,19%)] via-[hsl(29,22%,19%)]/85 to-[hsl(29,22%,19%)]/40" />
         </div>
 
         <div className="relative container mx-auto px-4 lg:px-8 py-20">
           <div className="max-w-2xl">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-4">Licensed Auto Transport Broker</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-foreground leading-tight mb-6">
+            <p className="text-[hsl(18,100%,60%)] font-semibold text-sm uppercase tracking-widest mb-4">Licensed Auto Transport Broker</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-white leading-tight mb-6">
               Nationwide Vehicle Shipping You Can <span className="text-gradient-gold">Trust</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-white/75 mb-8 max-w-lg leading-relaxed">
               Safe, reliable auto transport across all 50 states. Get connected with vetted carriers and competitive rates — fast.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -53,7 +53,7 @@ const Index = () => {
                 </Button>
               </Link>
               <a href="tel:+19165193588">
-                <Button size="lg" variant="outline" className="border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground">
+                <Button size="lg" variant="outline" className="border-white/40 text-white font-semibold hover:bg-white/10">
                   <Phone className="mr-2 w-4 h-4" /> Call Now
                 </Button>
               </a>
@@ -144,10 +144,10 @@ const Index = () => {
       {/* CTA */}
       <section className="py-20 bg-gradient-dark">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-4">
             Ready to Ship Your Vehicle?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+          <p className="text-white/65 mb-8 max-w-md mx-auto">
             Get a free, no-obligation quote in minutes. Nationwide coverage, competitive rates.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -157,7 +157,7 @@ const Index = () => {
               </Button>
             </Link>
             <a href="tel:+19165193588">
-              <Button size="lg" variant="outline" className="border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground">
+              <Button size="lg" variant="outline" className="border-white/40 text-white font-semibold hover:bg-white/10">
                 <Phone className="mr-2 w-4 h-4" /> (916) 519-3588
               </Button>
             </a>
