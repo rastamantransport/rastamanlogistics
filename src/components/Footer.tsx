@@ -17,9 +17,14 @@ const Footer = () => (
         <div>
           <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Services</p>
           <ul className="space-y-2">
-            {["Open Transport", "Enclosed Transport", "Dealer Transport", "Door-to-Door Delivery"].map((s) => (
-              <li key={s}>
-                <Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">{s}</Link>
+            {[
+              { label: "Open Auto Transport", path: "/open-auto-transport" },
+              { label: "Enclosed Transport", path: "/enclosed-auto-transport" },
+              { label: "Door-to-Door Shipping", path: "/door-to-door-shipping" },
+              { label: "Expedited Shipping", path: "/expedited-car-shipping" },
+            ].map((s) => (
+              <li key={s.path}>
+                <Link to={s.path} className="text-sm text-muted-foreground hover:text-primary transition-colors">{s.label}</Link>
               </li>
             ))}
           </ul>
