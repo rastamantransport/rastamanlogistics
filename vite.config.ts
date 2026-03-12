@@ -40,6 +40,9 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  ssr: {
+    noExternal: ["react-helmet-async"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
