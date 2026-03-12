@@ -52,6 +52,11 @@ const services = [
 
 const Services = () => (
   <div className="min-h-screen bg-background">
+    <SEOHead
+      title="Auto Transport Services | Open, Enclosed & Motorcycle Shipping"
+      description="Explore our vehicle shipping services: open car transport, enclosed auto shipping, motorcycle transport, dealer shipping, and door-to-door delivery. Get a free quote today."
+      canonical="https://rastamanlogistics.com/services"
+    />
     <Navbar />
     <main className="pt-16">
       <section className="py-20">

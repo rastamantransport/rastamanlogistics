@@ -38,6 +38,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Contact Rastaman Logistics | Get Help With Vehicle Shipping"
+        description="Contact Rastaman Logistics for auto transport questions or a free shipping quote. Call (916) 519-3588 or send us a message. Nationwide vehicle shipping support."
+        canonical="https://rastamanlogistics.com/contact"
+      />
       <Navbar />
       <main className="pt-16">
         <section className="py-20">

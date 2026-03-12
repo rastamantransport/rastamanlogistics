@@ -25,6 +25,11 @@ const whyChoose = [
 
 const About = () => (
   <div className="min-h-screen bg-background">
+    <SEOHead
+      title="About Rastaman Logistics | Licensed Auto Transport Broker Since 2015"
+      description="Learn about Rastaman Logistics LLC — an FMCSA-licensed auto transport broker with carrier roots since 2015. Safe, reliable nationwide vehicle shipping you can trust."
+      canonical="https://rastamanlogistics.com/about"
+    />
     <Navbar />
     <main className="pt-16">
       <section className="py-20">

@@ -66,6 +66,11 @@ const Reviews = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Customer Reviews | Rastaman Logistics Auto Transport"
+        description="Read verified customer reviews of Rastaman Logistics vehicle shipping services. See why customers trust us for nationwide auto transport."
+        canonical="https://rastamanlogistics.com/reviews"
+      />
       <Navbar />
       <main className="pt-16">
         {/* Hero */}
