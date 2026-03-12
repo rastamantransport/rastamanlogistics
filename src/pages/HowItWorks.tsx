@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FileText, Users, ClipboardCheck, Truck, CheckCircle, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const steps = [
   {
