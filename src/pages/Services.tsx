@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Truck, Shield, Package, Building2, MapPin, ArrowRight, Bike } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import openTransport from "@/assets/open-transport.jpg?format=webp";
 import enclosedTransport from "@/assets/enclosed-transport.jpg?format=webp";
 import motorcycleTransport from "@/assets/motorcycle-transport.jpg?format=webp";
