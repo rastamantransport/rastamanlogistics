@@ -96,6 +96,9 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground mb-3">
               Why Choose Rastaman Logistics
             </h2>
+            <p className="text-sm text-muted-foreground">
+              <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnap&query_param=USDOT&query_string=4536031" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">USDOT-4536031</a> | MC-1799328
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
