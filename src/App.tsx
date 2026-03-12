@@ -11,6 +11,10 @@ const StickyCallButton = lazy(() => import("./components/StickyCallButton"));
 const Index = lazy(() => import("./pages/Index"));
 const Quote = lazy(() => import("./pages/Quote"));
 const Services = lazy(() => import("./pages/Services"));
+const OpenAutoTransport = lazy(() => import("./pages/OpenAutoTransport"));
+const EnclosedAutoTransport = lazy(() => import("./pages/EnclosedAutoTransport"));
+const DoorToDoorShipping = lazy(() => import("./pages/DoorToDoorShipping"));
+const ExpeditedCarShipping = lazy(() => import("./pages/ExpeditedCarShipping"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const About = lazy(() => import("./pages/About"));
@@ -22,6 +26,26 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
+export const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Index />} />
+    <Route path="/quote" element={<Quote />} />
+    <Route path="/services" element={<Services />} />
+    <Route path="/open-auto-transport" element={<OpenAutoTransport />} />
+    <Route path="/enclosed-auto-transport" element={<EnclosedAutoTransport />} />
+    <Route path="/door-to-door-shipping" element={<DoorToDoorShipping />} />
+    <Route path="/expedited-car-shipping" element={<ExpeditedCarShipping />} />
+    <Route path="/gallery" element={<Gallery />} />
+    <Route path="/how-it-works" element={<HowItWorks />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/reviews" element={<Reviews />} />
+    <Route path="/admin/login" element={<AdminLogin />} />
+    <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+);
+
 const App = () => (
   <HelmetProvider>
   <QueryClientProvider client={queryClient}>
@@ -32,19 +56,7 @@ const App = () => (
       </Suspense>
       <BrowserRouter>
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/quote" element={<Quote />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppRoutes />
         </Suspense>
         <Suspense fallback={null}>
           <StickyCallButton />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Truck, Shield, Package, Building2, MapPin, ArrowRight, Bike } from "lucide-react";
+import { Truck, Shield, Package, Building2, MapPin, ArrowRight, Bike, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -10,23 +10,39 @@ import motorcycleTransport from "@/assets/motorcycle-transport.jpg?format=webp";
 
 const services = [
   {
-    icon: Shield,
-    title: "Enclosed Car Transport",
-    desc: "Premium protection for high-value, luxury, classic, and exotic vehicles. Your car travels inside a fully enclosed trailer, shielded from weather and road debris.",
-    benefits: ["Maximum vehicle protection", "Climate-controlled options", "Perfect for luxury & classics"],
-    image: enclosedTransport,
-  },
-  {
     icon: Truck,
-    title: "Open Car Transport",
+    title: "Open Auto Transport",
     desc: "The most popular and affordable option for vehicle shipping. Your car is loaded onto an open multi-car carrier — the same method used by dealerships and manufacturers nationwide.",
     benefits: ["Most cost-effective option", "Widely available routes", "Ideal for standard vehicles"],
     image: openTransport,
+    link: "/open-auto-transport",
+  },
+  {
+    icon: Shield,
+    title: "Enclosed Auto Transport",
+    desc: "Premium protection for high-value, luxury, classic, and exotic vehicles. Your car travels inside a fully enclosed trailer, shielded from weather and road debris.",
+    benefits: ["Maximum vehicle protection", "Climate-controlled options", "Perfect for luxury & classics"],
+    image: enclosedTransport,
+    link: "/enclosed-auto-transport",
+  },
+  {
+    icon: MapPin,
+    title: "Door-to-Door Shipping",
+    desc: "We pick up your vehicle from your specified location and deliver it directly to your destination — no terminals, no extra trips, no hassle.",
+    benefits: ["Convenient pickup & delivery", "No terminal drop-offs", "Available nationwide"],
+    link: "/door-to-door-shipping",
+  },
+  {
+    icon: Clock,
+    title: "Expedited Car Shipping",
+    desc: "Need your vehicle shipped fast? Our expedited service guarantees priority pickup within 24–48 hours and faster transit times through direct routing.",
+    benefits: ["Priority carrier assignment", "Pickup within 24–48 hours", "Faster transit times"],
+    link: "/expedited-car-shipping",
   },
   {
     icon: Bike,
     title: "Motorcycle Transport",
-    desc: "Secure and professional motorcycle transport nationwide. Whether you're shipping a single bike, multiple motorcycles, or a custom trike, we connect you with experienced carriers who specialize in safe two- and three-wheel transport. Your motorcycle is carefully secured using professional tie-down systems and transported in enclosed or open trailers depending on your needs.",
+    desc: "Secure and professional motorcycle transport nationwide. Whether you're shipping a single bike, multiple motorcycles, or a custom trike, we connect you with experienced carriers.",
     benefits: ["Harleys, sport bikes, vintage & trikes", "Professional tie-down systems", "Enclosed or open trailer options"],
     image: motorcycleTransport,
   },
@@ -42,19 +58,13 @@ const services = [
     desc: "Shipping multiple vehicles? We coordinate logistics for fleet moves, corporate relocations, and bulk transport with dedicated support.",
     benefits: ["Fleet management support", "Consolidated shipping", "Dedicated account manager"],
   },
-  {
-    icon: MapPin,
-    title: "Door-to-Door Delivery",
-    desc: "We pick up your vehicle from your specified location and deliver it directly to your destination — no terminals, no extra trips, no hassle.",
-    benefits: ["Convenient pickup & delivery", "No terminal drop-offs", "Available nationwide"],
-  },
 ];
 
 const Services = () => (
   <div className="min-h-screen bg-background">
     <SEOHead
-      title="Auto Transport Services | Open, Enclosed & Motorcycle Shipping"
-      description="Explore our vehicle shipping services: open car transport, enclosed auto shipping, motorcycle transport, dealer shipping, and door-to-door delivery. Get a free quote today."
+      title="Auto Transport Services | Open, Enclosed & Expedited Shipping"
+      description="Explore our vehicle shipping services: open auto transport, enclosed car shipping, door-to-door delivery, expedited shipping, and more. Get a free quote today."
       canonical="https://rastamanlogistics.com/services"
     />
     <Navbar />
@@ -94,11 +104,26 @@ const Services = () => (
                         </li>
                       ))}
                     </ul>
-                    <Link to="/quote">
-                      <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
-                        Get a Quote <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
-                    </Link>
+                    {s.link ? (
+                      <div className="flex gap-3">
+                        <Link to={s.link}>
+                          <Button variant="outline" className="border-border text-foreground hover:bg-muted font-semibold">
+                            Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                          </Button>
+                        </Link>
+                        <Link to="/quote">
+                          <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
+                            Get a Quote
+                          </Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <Link to="/quote">
+                        <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
+                          Get a Quote <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
