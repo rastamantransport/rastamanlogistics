@@ -23,6 +23,13 @@ const services = [
     image: openTransport,
   },
   {
+    icon: Bike,
+    title: "Motorcycle Transport",
+    desc: "Secure and professional motorcycle transport nationwide. Whether you're shipping a single bike, multiple motorcycles, or a custom trike, we connect you with experienced carriers who specialize in safe two- and three-wheel transport. Your motorcycle is carefully secured using professional tie-down systems and transported in enclosed or open trailers depending on your needs.",
+    benefits: ["Harleys, sport bikes, vintage & trikes", "Professional tie-down systems", "Enclosed or open trailer options"],
+    image: motorcycleTransport,
+  },
+  {
     icon: Building2,
     title: "Dealer & Auction Transport",
     desc: "Reliable transport solutions for dealerships, auctions, and automotive businesses. We handle single or multi-vehicle shipments with the efficiency your business demands.",
