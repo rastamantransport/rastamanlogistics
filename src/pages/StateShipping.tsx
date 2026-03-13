@@ -12,8 +12,7 @@ const StateShipping = () => {
   const stateData = getStateBySlug(`car-shipping-${state}`);
 
   if (!stateData) {
-    const NotFound = require("./NotFound").default;
-    return <NotFound />;
+    return <Navigate to="/404" replace />;
   }
 
   const { name, abbreviation, majorCities, avgShippingCost, avgTransitDays, description } = stateData;
