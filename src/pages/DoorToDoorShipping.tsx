@@ -55,7 +55,7 @@ const DoorToDoorShipping = () => (
               Whether you're relocating across the country, purchasing a vehicle online, or sending a car to a family member, door-to-door shipping is the most convenient way to move your vehicle without the hassle.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/quote">
+              <Link to="/car-shipping-calculator">
                 <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
                   Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
