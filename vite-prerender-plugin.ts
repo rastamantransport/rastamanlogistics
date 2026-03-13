@@ -100,7 +100,14 @@ function setupPolyfills() {
     createElement: () => ({ ...mockElement }),
     createTextNode: () => ({}),
     createElementNS: () => ({ ...mockElement }),
-    head: { appendChild: () => {}, removeChild: () => {}, children: [], querySelectorAll: () => [], querySelector: () => null, getElementsByTagName: () => [] },
+    head: {
+      appendChild: () => {},
+      removeChild: () => {},
+      children: [],
+      querySelectorAll: () => [],
+      querySelector: () => null,
+      getElementsByTagName: () => [],
+    },
     body: { appendChild: () => {}, removeChild: () => {}, style: {}, children: [] },
     documentElement: {
       style: {},
@@ -127,14 +134,20 @@ function setupPolyfills() {
     removeEventListener: () => {},
     dispatchEvent: () => true,
     getComputedStyle: () => ({ getPropertyValue: () => '', setProperty: () => {} }),
-    matchMedia: () => ({ matches: false, addListener: () => {}, removeListener: () => {}, addEventListener: () => {}, removeEventListener: () => {} }),
+    matchMedia: () => ({
+      matches: false,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }),
     scrollTo: () => {},
     scrollX: 0,
     scrollY: 0,
     innerWidth: 1280,
     innerHeight: 800,
-    requestAnimationFrame: (cb: any) => setTimeout(cb, 0),
-    cancelAnimationFrame: (id: any) => clearTimeout(id),
+    requestAnimationFrame: (cb) => setTimeout(cb, 0),
+    cancelAnimationFrame: (id) => clearTimeout(id),
     setTimeout,
     clearTimeout,
     setInterval,
@@ -209,55 +222,34 @@ export default function prerenderPlugin(): Plugin {
       const { render } = await import(entryUrl);
 
       console.log(`[prerender] Prerendering ${ROUTES.length} routes...`);
-await Promise.all(
-  ROUTES.map(async (route) => {
-    try {
-      const { html: appHtml, head } = render(route);
-      let finalHtml = template;
-      finalHtml = finalHtml.replace(
-        '<div id="root"></div>',
-        `<div id="root">${appHtml}</div>`
+
+      await Promise.all(
+        ROUTES.map(async (route) => {
+          try {
+            const { html: appHtml, head } = render(route);
+            let finalHtml = template;
+            finalHtml = finalHtml.replace(
+              '<div id="root"></div>',
+              `<div id="root">${appHtml}</div>`
+            );
+            if (head) {
+              finalHtml = finalHtml.replace("</head>", `${head}\n</head>`);
+            }
+            const filePath =
+              route === "/"
+                ? path.join(outDir, "index.html")
+                : path.join(outDir, route.slice(1) + ".html");
+            const dir = path.dirname(filePath);
+            if (!fs.existsSync(dir)) {
+              fs.mkdirSync(dir, { recursive: true });
+            }
+            fs.writeFileSync(filePath, finalHtml);
+            console.log(`[prerender] ✓ ${route}`);
+          } catch (err) {
+            console.error(`[prerender] ✗ ${route}:`, err);
+          }
+        })
       );
-      if (head) {
-        finalHtml = finalHtml.replace("</head>", `${head}\n</head>`);
-      }
-      const filePath =
-        route === "/"
-          ? path.join(outDir, "index.html")
-          : path.join(outDir, route.slice(1) + ".html");
-      const dir = path.dirname(filePath);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      fs.writeFileSync(filePath, finalHtml);
-      console.log(`[prerender] ✓ ${route}`);
-    } catch (err) {
-      console.error(`[prerender] ✗ ${route}:`, err);
-    }
-  })
-);
-          let finalHtml = template;
-          finalHtml = finalHtml.replace(
-            '<div id="root"></div>',
-            `<div id="root">${appHtml}</div>`
-          );
-          if (head) {
-            finalHtml = finalHtml.replace("</head>", `${head}\n</head>`);
-          }
-          const filePath =
-            route === "/"
-              ? path.join(outDir, "index.html")
-              : path.join(outDir, route.slice(1) + ".html");
-          const dir = path.dirname(filePath);
-          if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-          }
-          fs.writeFileSync(filePath, finalHtml);
-          console.log(`[prerender] ✓ ${route}`);
-        } catch (err) {
-          console.error(`[prerender] ✗ ${route}:`, err);
-        }
-      }
 
       fs.rmSync(ssrOutDir, { recursive: true, force: true });
       console.log("[prerender] Done.");
