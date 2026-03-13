@@ -105,6 +105,7 @@ const AdminDashboard = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="min-h-screen bg-background">
+      <header className="border-b border-border bg-background/90 backdrop-blur-md sticky top-0 z-40">
         <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-14">
           <h1 className="text-lg font-bold font-display text-foreground">
             Admin <span className="text-primary">Dashboard</span>
