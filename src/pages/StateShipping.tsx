@@ -1,18 +1,19 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { getStateBySlug } from "@/data/states";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import NotFound from "./NotFound";
 import { Truck, Clock, DollarSign, MapPin, Shield, CheckCircle } from "lucide-react";
 
 const StateShipping = () => {
-  const { state } = useParams<{ state: string }>();
-  const stateData = getStateBySlug(`car-shipping-${state}`);
+  const { stateSlug } = useParams<{ stateSlug: string }>();
+  const stateData = stateSlug ? getStateBySlug(stateSlug) : undefined;
 
   if (!stateData) {
-    return <Navigate to="/404" replace />;
+    return <NotFound />;
   }
 
   const { name, abbreviation, majorCities, avgShippingCost, avgTransitDays, description } = stateData;
