@@ -1,4 +1,3 @@
-
 import { Plugin, ResolvedConfig } from "vite";
 import fs from "fs";
 import path from "path";
@@ -16,7 +15,6 @@ const ROUTES = [
   "/about",
   "/reviews",
   "/contact",
-  // State landing pages
   "/car-shipping-alabama",
   "/car-shipping-arizona",
   "/car-shipping-arkansas",
@@ -225,16 +223,12 @@ export default function prerenderPlugin(): Plugin {
           const filePath =
             route === "/"
               ? path.join(outDir, "index.html")
-              : path.join(outDir, route.slice(1), "index.html");
-          const filePath =
-  route === "/"
-    ? path.join(outDir, "index.html")
-    : path.join(outDir, route.slice(1) + ".html");
-const dir = path.dirname(filePath);
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir, { recursive: true });
-}
-fs.writeFileSync(filePath, finalHtml);
+              : path.join(outDir, route.slice(1) + ".html");
+          const dir = path.dirname(filePath);
+          if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+          }
+          fs.writeFileSync(filePath, finalHtml);
           console.log(`[prerender] ✓ ${route}`);
         } catch (err) {
           console.error(`[prerender] ✗ ${route}:`, err);
