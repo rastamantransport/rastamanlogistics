@@ -9,7 +9,7 @@ const Quote = () => (
     <SEOHead
       title="Free Car Shipping Quote | Rastaman Logistics Auto Transport"
       description="Get a free, no-obligation auto transport quote in minutes. Nationwide vehicle shipping with competitive rates. Open and enclosed car transport available."
-      canonical="https://rastamanlogistics.com/quote"
+      canonical="https://rastamanlogistics.com/car-shipping-calculator"
     />
     <Navbar />
     <main className="pt-16">
