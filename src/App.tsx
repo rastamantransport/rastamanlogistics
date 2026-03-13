@@ -44,6 +44,7 @@ export const AppRoutes = () => (
     <Route path="/reviews" element={<Reviews />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/car-shipping/:stateName" element={<StateShipping />} />
     <Route path="/:stateSlug" element={<StateShipping />} />
     <Route path="*" element={<NotFound />} />
   </Routes>

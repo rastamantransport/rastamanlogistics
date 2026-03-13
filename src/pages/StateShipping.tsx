@@ -1,16 +1,58 @@
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { getStateBySlug } from "@/data/states";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import { Truck, Clock, DollarSign, MapPin, Shield, CheckCircle } from "lucide-react";
 
 const StateShipping = () => {
-  const { stateSlug } = useParams<{ stateSlug: string }>();
-  const stateData = stateSlug ? getStateBySlug(stateSlug) : undefined;
+  const location = useLocation();
+  const { stateSlug, stateName, "*": stateWildcard } = useParams<{
+    stateSlug: string;
+    stateName: string;
+    "*": string;
+  }>();
+
+  const slugCandidates = new Set<string>();
+
+  const addSlugCandidate = (value?: string) => {
+    if (!value) return;
+
+    const cleaned = decodeURIComponent(value)
+      .trim()
+      .toLowerCase()
+      .replace(/^\/+|\/+$/g, "")
+      .replace(/\s+/g, "-");
+
+    if (!cleaned) return;
+
+    const normalized = cleaned
+      .replace(/^car-shipping\//, "car-shipping-")
+      .replace(/\//g, "-");
+
+    slugCandidates.add(normalized);
+
+    if (!normalized.startsWith("car-shipping-")) {
+      slugCandidates.add(`car-shipping-${normalized}`);
+    }
+  };
+
+  addSlugCandidate(stateSlug);
+  addSlugCandidate(stateName);
+  addSlugCandidate(stateWildcard ? `car-shipping-${stateWildcard}` : undefined);
+  addSlugCandidate(location.pathname);
+
+  let stateData: ReturnType<typeof getStateBySlug>;
+
+  for (const slug of slugCandidates) {
+    const match = getStateBySlug(slug);
+    if (match) {
+      stateData = match;
+      break;
+    }
+  }
 
   if (!stateData) {
     return <NotFound />;
