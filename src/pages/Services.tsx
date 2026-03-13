@@ -111,7 +111,7 @@ const Services = () => (
                             Learn More <ArrowRight className="ml-2 w-4 h-4" />
                           </Button>
                         </Link>
-                        <Link to="/quote">
+                        <Link to="/car-shipping-calculator">
                           <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
                             Get a Quote
                           </Button>
