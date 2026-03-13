@@ -57,7 +57,7 @@ const ExpeditedCarShipping = () => (
               Whether it's a last-minute relocation, a military PCS deadline, or a vehicle auction with a tight pickup window — our rush shipping service ensures your car arrives when you need it, not when it's convenient for the carrier.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/quote">
+              <Link to="/car-shipping-calculator">
                 <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
                   Get Rush Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
