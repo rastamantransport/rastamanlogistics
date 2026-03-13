@@ -14,6 +14,7 @@ export const routeConfig = [
   { path: "/about", component: "About" },
   { path: "/contact", component: "Contact" },
   { path: "/reviews", component: "Reviews" },
+  { path: "/blog", component: "Blog" },
 ] as const;
 
 // Redirect config

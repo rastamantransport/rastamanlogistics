@@ -45,6 +45,8 @@ export const AppRoutes = () => (
     <Route path="/about" element={<About />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/reviews" element={<Reviews />} />
+    <Route path="/blog" element={<Blog />} />
+    <Route path="/blog/:slug" element={<BlogPost />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
     {/* Explicit state routes — no broad /:stateSlug catch-all */}

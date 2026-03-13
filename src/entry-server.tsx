@@ -40,6 +40,8 @@ function ServerRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<Reviews />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/car-shipping/:stateName" element={<StateShipping />} />
       {states.map((s) => (
         <Route key={s.slug} path={`/${s.slug}`} element={<StateShipping />} />
