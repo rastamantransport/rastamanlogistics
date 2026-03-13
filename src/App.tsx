@@ -22,6 +22,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Reviews = lazy(() => import("./pages/Reviews"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const StateShipping = lazy(() => import("./pages/StateShipping"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ export const AppRoutes = () => (
     <Route path="/reviews" element={<Reviews />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/car-shipping-:state" element={<StateShipping />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
