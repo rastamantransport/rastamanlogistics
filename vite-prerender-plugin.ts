@@ -2,17 +2,13 @@ import { Plugin, ResolvedConfig } from "vite";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
-import * as cheerio from "cheerio";
-import { Window } from "linkedom"; // No Document needed, Window provides it
 
 // -----------------------------------------------------------------------------
 //   CONFIGURATION
 // -----------------------------------------------------------------------------
 
-// Fallback hardcoded routes (your originals minus states for now)
 const FALLBACK_ROUTES = ["/", "/404"];
 
-// Hardcoded state routes (from your original ROUTES—move to dynamic if possible)
 const STATE_ROUTES = [
   "/car-shipping-alabama", "/car-shipping-arizona", "/car-shipping-arkansas",
   "/car-shipping-california", "/car-shipping-colorado", "/car-shipping-connecticut",
@@ -32,57 +28,7 @@ const STATE_ROUTES = [
   "/car-shipping-west-virginia", "/car-shipping-wisconsin", "/car-shipping-wyoming",
 ];
 
-// Your server entry
 const ENTRY_SERVER = "src/entry-server.tsx";
-
-// -----------------------------------------------------------------------------
-//   IMPROVED POLYFILLS (linkedom-based)
-// -----------------------------------------------------------------------------
-
-function setupPolyfills() {
-  // Base mock document (linkedom provides a lightweight DOM)
-  const { window, document } = new Window(
-    `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`,
-    { url: "https://rastamanlogistics.vercel.app" } // Match your origin
-  );
-
-  // Expose globals
-  (global as any).window = window;
-  (global as any).document = document;
-  (global as any).navigator = window.navigator;
-  (global as any).location = window.location;
-  (global as any).history = window.history;
-  (global as any).localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
-  (global as any).sessionStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
-
-  // Extras for common libs (React Query, Helmet, etc.)
-  window.CustomEvent = class CustomEvent extends Event {
-    detail: any;
-    constructor(type: string, eventInitDict?: CustomEventInit) {
-      super(type, eventInitDict);
-      this.detail = eventInitDict?.detail ?? null;
-    }
-  } as any;
-
-  window.getComputedStyle = (elt: Element) => ({
-    getPropertyValue: (prop: string) => "",
-  } as CSSStyleDeclaration);
-
-  class FakeObserver {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  }
-  window.MutationObserver = FakeObserver as any;
-  window.ResizeObserver = FakeObserver as any;
-  window.IntersectionObserver = FakeObserver as any;
-
-  window.matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} }) as any;
-  window.requestAnimationFrame = (cb: any) => setTimeout(cb, 0);
-  window.cancelAnimationFrame = (id: any) => clearTimeout(id);
-
-  console.log("[prerender] Polyfills applied (linkedom + extras for Helmet/Query/Router)");
-}
 
 // -----------------------------------------------------------------------------
 //   PLUGIN
@@ -103,7 +49,34 @@ export default function prerenderPlugin(): Plugin {
       const start = Date.now();
       console.log("[prerender] Starting...");
 
-      setupPolyfills();
+      // Dynamic imports to avoid breaking dev server
+      const cheerio = await import("cheerio");
+      const linkedom = await import("linkedom");
+
+      // Setup polyfills
+      const { parseHTML } = linkedom;
+      const { document, window } = parseHTML(
+        `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`
+      );
+
+      (global as any).window = window;
+      (global as any).document = document;
+      (global as any).navigator = (window as any).navigator ?? { userAgent: "" };
+      (global as any).location = (window as any).location ?? { href: "", pathname: "/" };
+      (global as any).history = (window as any).history ?? { pushState: () => {}, replaceState: () => {} };
+      (global as any).localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
+      (global as any).sessionStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
+
+      (window as any).matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} });
+      (window as any).requestAnimationFrame = (cb: any) => setTimeout(cb, 0);
+      (window as any).cancelAnimationFrame = (id: any) => clearTimeout(id);
+
+      class FakeObserver { observe() {} unobserve() {} disconnect() {} }
+      (window as any).MutationObserver = FakeObserver;
+      (window as any).ResizeObserver = FakeObserver;
+      (window as any).IntersectionObserver = FakeObserver;
+
+      console.log("[prerender] Polyfills applied");
 
       const outDir = path.resolve(config.root, config.build.outDir || "dist");
       const templatePath = path.join(outDir, "index.html");
@@ -117,11 +90,12 @@ export default function prerenderPlugin(): Plugin {
 
       // Build SSR bundle
       const { build } = await import("vite");
-      await build({
-        ...config, // Reuse full config
-        plugins: [], // Avoid recursion
+      const ssrConfig: any = {
+        root: config.root,
+        base: config.base,
+        publicDir: false,
+        plugins: [],
         build: {
-          ...config.build,
           ssr: true,
           outDir: path.join(outDir, ".ssr-temp"),
           rollupOptions: {
@@ -129,38 +103,36 @@ export default function prerenderPlugin(): Plugin {
           },
           emptyOutDir: false,
         },
-        logLevel: "warn",
-      });
+        resolve: config.resolve,
+        logLevel: "warn" as const,
+      };
+      await build(ssrConfig);
 
       const ssrOutDir = path.join(outDir, ".ssr-temp");
-      const entryPath = path.join(ssrOutDir, "entry-server.js"); // Vite outputs .js
+      const entryPath = path.join(ssrOutDir, "entry-server.js");
       const entryUrl = pathToFileURL(entryPath).href;
 
       let render: (url: string) => Promise<{ html: string; head?: string }>;
       try {
         const mod = await import(entryUrl);
-        render = mod.render; // Matches your export
+        render = mod.render;
       } catch (err) {
         console.error("[prerender] Failed to load SSR entry:", err);
         return;
       }
 
-      // Collect routes dynamically
+      // Collect routes
       let routes: string[] = [];
       try {
         const { routeConfig } = await import(path.resolve(config.root, "src/routes.tsx"));
         routes = routeConfig.map((r: { path: string }) => r.path).filter(Boolean);
-        console.log("[prerender] Loaded dynamic routes from src/routes.tsx");
-      } catch (err) {
-        console.warn("[prerender] Failed to load src/routes.tsx:", err);
+      } catch {
+        console.warn("[prerender] Could not load src/routes.tsx, using fallbacks");
       }
 
-      // Merge with fallbacks and states
-      routes = [...new Set([...routes, ...FALLBACK_ROUTES, ...STATE_ROUTES])]; // Dedupe
-
+      routes = [...new Set([...routes, ...FALLBACK_ROUTES, ...STATE_ROUTES])];
       console.log(`[prerender] Prerendering ${routes.length} routes...`);
 
-      // Render loop
       for (const route of routes) {
         try {
           const timer = Date.now();
@@ -183,11 +155,7 @@ export default function prerenderPlugin(): Plugin {
         }
       }
 
-      // For faster builds: await Promise.all(routes.map(async (route) => { ... }));
-
-      // Cleanup
       fs.rmSync(ssrOutDir, { recursive: true, force: true });
-
       console.log(`[prerender] Done in ${Date.now() - start}ms`);
     },
   };
