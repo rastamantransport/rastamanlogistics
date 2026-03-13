@@ -322,6 +322,8 @@ export default function prerenderPlugin(): Plugin {
           `[prerender] Done. ${success} succeeded, ${failed} failed.`
         );
       } finally {
+        // Restore original globals
+        restoreGlobals(savedGlobals);
         // Always clean up SSR temp directory
         if (fs.existsSync(ssrOutDir)) {
           fs.rmSync(ssrOutDir, { recursive: true, force: true });
