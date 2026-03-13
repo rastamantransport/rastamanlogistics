@@ -1,3 +1,4 @@
+
 import { Plugin, ResolvedConfig } from "vite";
 import fs from "fs";
 import path from "path";
@@ -104,9 +105,9 @@ function setupPolyfills() {
   (global as any).document = mockDocument;
   (global as any).localStorage = mockLocalStorage;
   (global as any).sessionStorage = mockLocalStorage;
-  (global as any).navigator = mockWindow.navigator;
-  (global as any).location = mockWindow.location;
-  (global as any).history = mockWindow.history;
+  Object.defineProperty(global, 'navigator', { value: mockWindow.navigator, writable: true, configurable: true });
+  Object.defineProperty(global, 'location', { value: mockWindow.location, writable: true, configurable: true });
+  Object.defineProperty(global, 'history', { value: mockWindow.history, writable: true, configurable: true });
   (global as any).CustomEvent = mockWindow.CustomEvent;
   (global as any).Event = mockWindow.Event;
   (global as any).MutationObserver = mockWindow.MutationObserver;
