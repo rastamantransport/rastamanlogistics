@@ -7,7 +7,7 @@ import { AppRoutes } from "./App";
 
 export function render(url: string) {
   const queryClient = new QueryClient();
-  const helmetContext: { helmet?: Record<string, { toString(): string }> } = {};
+  const helmetContext: Record<string, unknown> = {};
 
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
