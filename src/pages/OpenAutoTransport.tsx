@@ -115,7 +115,7 @@ const OpenAutoTransport = () => (
             Ready to Ship Your Vehicle?
           </h2>
           <p className="text-white/65 mb-8 max-w-md mx-auto">Get a free, no-obligation open transport quote in minutes.</p>
-          <Link to="/quote">
+          <Link to="/car-shipping-calculator">
             <Button size="lg" className="bg-gradient-gold text-primary-foreground font-bold px-8 hover:opacity-90">
               Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
             </Button>

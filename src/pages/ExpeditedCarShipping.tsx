@@ -110,7 +110,7 @@ const ExpeditedCarShipping = () => (
             Need It Shipped Fast?
           </h2>
           <p className="text-white/65 mb-8 max-w-md mx-auto">Get a free expedited shipping quote — priority pickup within 24–48 hours.</p>
-          <Link to="/quote">
+          <Link to="/car-shipping-calculator">
             <Button size="lg" className="bg-gradient-gold text-primary-foreground font-bold px-8 hover:opacity-90">
               Get Rush Quote <ArrowRight className="ml-2 w-4 h-4" />
             </Button>

@@ -151,7 +151,7 @@ const Index = () => {
             Get a free, no-obligation quote in minutes. Nationwide coverage, competitive rates.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/quote">
+            <Link to="/car-shipping-calculator">
               <Button size="lg" className="bg-gradient-gold text-primary-foreground font-bold px-8 hover:opacity-90">
                 Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
