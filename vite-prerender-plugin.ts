@@ -85,131 +85,91 @@ function routeToFilePath(route: string): string {
  * Minimal browser globals needed for SSR rendering.
  * Avoids brittle full DOM mocks — only stubs what React and common libs actually touch.
  */
+const GLOBAL_KEYS = [
+  "window", "document", "localStorage", "sessionStorage", "navigator",
+  "location", "history", "CustomEvent", "Event", "MutationObserver",
+  "ResizeObserver", "IntersectionObserver", "matchMedia", "getComputedStyle",
+  "requestAnimationFrame", "cancelAnimationFrame",
+] as const;
+
+function saveGlobals(): Record<string, { existed: boolean; value: any }> {
+  const saved: Record<string, { existed: boolean; value: any }> = {};
+  for (const key of GLOBAL_KEYS) {
+    saved[key] = { existed: key in global, value: (global as any)[key] };
+  }
+  return saved;
+}
+
+function restoreGlobals(saved: Record<string, { existed: boolean; value: any }>) {
+  const safeSet = (obj: any, key: string, value: any) => {
+    try { obj[key] = value; } catch {
+      Object.defineProperty(obj, key, { value, writable: true, configurable: true });
+    }
+  };
+  for (const key of GLOBAL_KEYS) {
+    if (saved[key]?.existed) {
+      safeSet(global, key, saved[key].value);
+    } else {
+      try { delete (global as any)[key]; } catch {}
+    }
+  }
+}
+
 function setupMinimalGlobals() {
   const noop = () => {};
-  const noopObj = () => ({});
 
   const mockStorage = {
-    getItem: () => null,
-    setItem: noop,
-    removeItem: noop,
-    clear: noop,
-    length: 0,
-    key: () => null,
+    getItem: () => null, setItem: noop, removeItem: noop, clear: noop,
+    length: 0, key: () => null,
   };
 
   const mockElement: any = {
-    style: {},
-    setAttribute: noop,
-    getAttribute: () => null,
-    appendChild: () => mockElement,
-    removeChild: () => mockElement,
+    style: {}, setAttribute: noop, getAttribute: () => null,
+    appendChild: () => mockElement, removeChild: () => mockElement,
     classList: { add: noop, remove: noop, contains: () => false, toggle: noop },
-    addEventListener: noop,
-    removeEventListener: noop,
-    innerHTML: "",
-    textContent: "",
-    children: [],
-    childNodes: [],
-    querySelectorAll: () => [],
-    querySelector: () => null,
+    addEventListener: noop, removeEventListener: noop,
+    innerHTML: "", textContent: "", children: [], childNodes: [],
+    querySelectorAll: () => [], querySelector: () => null,
   };
 
   const mockDocument = {
-    cookie: "",
-    querySelector: () => null,
-    querySelectorAll: () => [],
-    getElementsByTagName: () => [],
-    getElementsByClassName: () => [],
+    cookie: "", querySelector: () => null, querySelectorAll: () => [],
+    getElementsByTagName: () => [], getElementsByClassName: () => [],
     getElementById: () => null,
-    createElement: () => ({ ...mockElement }),
-    createTextNode: () => ({}),
+    createElement: () => ({ ...mockElement }), createTextNode: () => ({}),
     createElementNS: () => ({ ...mockElement }),
-    head: { ...mockElement },
-    body: { ...mockElement, style: {} },
+    head: { ...mockElement }, body: { ...mockElement, style: {} },
     documentElement: {
-      style: {},
-      setAttribute: noop,
-      getAttribute: () => null,
-      lang: "en",
+      style: {}, setAttribute: noop, getAttribute: () => null, lang: "en",
       classList: { add: noop, remove: noop, contains: () => false },
     },
-    addEventListener: noop,
-    removeEventListener: noop,
-    dispatchEvent: () => true,
-    readyState: "complete",
+    addEventListener: noop, removeEventListener: noop,
+    dispatchEvent: () => true, readyState: "complete",
   };
 
   const mockWindow: any = {
-    document: mockDocument,
-    localStorage: mockStorage,
-    sessionStorage: mockStorage,
-    location: {
-      href: "/",
-      pathname: "/",
-      search: "",
-      hash: "",
-      origin: "https://rastamanlogistics.com",
-    },
+    document: mockDocument, localStorage: mockStorage, sessionStorage: mockStorage,
+    location: { href: "/", pathname: "/", search: "", hash: "", origin: "https://rastamanlogistics.com" },
     history: { pushState: noop, replaceState: noop, back: noop },
     navigator: { userAgent: "node", language: "en-US", languages: ["en-US"] },
     screen: { width: 1280, height: 800 },
-    addEventListener: noop,
-    removeEventListener: noop,
-    dispatchEvent: () => true,
-    getComputedStyle: () => ({
-      getPropertyValue: () => "",
-      setProperty: noop,
-    }),
-    matchMedia: () => ({
-      matches: false,
-      addListener: noop,
-      removeListener: noop,
-      addEventListener: noop,
-      removeEventListener: noop,
-    }),
-    scrollTo: noop,
-    scrollX: 0,
-    scrollY: 0,
-    innerWidth: 1280,
-    innerHeight: 800,
+    addEventListener: noop, removeEventListener: noop, dispatchEvent: () => true,
+    getComputedStyle: () => ({ getPropertyValue: () => "", setProperty: noop }),
+    matchMedia: () => ({ matches: false, addListener: noop, removeListener: noop, addEventListener: noop, removeEventListener: noop }),
+    scrollTo: noop, scrollX: 0, scrollY: 0, innerWidth: 1280, innerHeight: 800,
     requestAnimationFrame: (cb: () => void) => setTimeout(cb, 0),
     cancelAnimationFrame: (id: number) => clearTimeout(id),
-    setTimeout,
-    clearTimeout,
-    setInterval,
-    clearInterval,
-    console,
+    setTimeout, clearTimeout, setInterval, clearInterval, console,
     CSS: { supports: () => false },
-    CustomEvent: class CustomEvent {
-      constructor() {}
-    },
-    Event: class Event {
-      constructor() {}
-    },
-    MutationObserver: class MutationObserver {
-      observe() {}
-      disconnect() {}
-      takeRecords() {
-        return [];
-      }
-    },
-    ResizeObserver: class ResizeObserver {
-      observe() {}
-      disconnect() {}
-      unobserve() {}
-    },
-    IntersectionObserver: class IntersectionObserver {
-      observe() {}
-      disconnect() {}
-      unobserve() {}
-    },
+    CustomEvent: class CustomEvent { constructor() {} },
+    Event: class Event { constructor() {} },
+    MutationObserver: class MutationObserver { observe() {} disconnect() {} takeRecords() { return []; } },
+    ResizeObserver: class ResizeObserver { observe() {} disconnect() {} unobserve() {} },
+    IntersectionObserver: class IntersectionObserver { observe() {} disconnect() {} unobserve() {} },
   };
 
   const safeSet = (obj: any, key: string, value: any) => {
-    try {
-      obj[key] = value;
-    } catch {
+    try { obj[key] = value; } catch {
       Object.defineProperty(obj, key, { value, writable: true, configurable: true });
     }
   };
