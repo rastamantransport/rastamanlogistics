@@ -83,9 +83,9 @@ const Navbar = () => {
               <Phone className="w-4 h-4" />
               (916) 519-3588
             </a>
-            <Link to="/quote" onClick={() => setMobileOpen(false)}>
+            <Link to="/car-shipping-calculator" onClick={() => setMobileOpen(false)}>
               <Button className="w-full bg-gradient-gold text-primary-foreground font-semibold">
-                Get Free Quote
+                Get a Quote
               </Button>
             </Link>
           </div>
