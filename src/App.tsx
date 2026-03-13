@@ -21,6 +21,8 @@ const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Reviews = lazy(() => import("./pages/Reviews"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const StateShipping = lazy(() => import("./pages/StateShipping"));
@@ -43,6 +45,8 @@ export const AppRoutes = () => (
     <Route path="/about" element={<About />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/reviews" element={<Reviews />} />
+    <Route path="/blog" element={<Blog />} />
+    <Route path="/blog/:slug" element={<BlogPost />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
     {/* Explicit state routes — no broad /:stateSlug catch-all */}

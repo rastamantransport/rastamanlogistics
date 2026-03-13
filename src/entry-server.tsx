@@ -19,6 +19,8 @@ import HowItWorks from "./pages/HowItWorks";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Reviews from "./pages/Reviews";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import StateShipping from "./pages/StateShipping";
 import NotFound from "./pages/NotFound";
 
@@ -38,6 +40,8 @@ function ServerRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<Reviews />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/car-shipping/:stateName" element={<StateShipping />} />
       {states.map((s) => (
         <Route key={s.slug} path={`/${s.slug}`} element={<StateShipping />} />

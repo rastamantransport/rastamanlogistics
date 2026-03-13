@@ -55,6 +55,42 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- Blog -->
+  <url>
+    <loc>https://rastamanlogistics.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/how-to-prepare-your-car-for-shipping</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/open-vs-enclosed-auto-transport</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/how-much-does-it-cost-to-ship-a-car</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/questions-to-ask-auto-transport-broker</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/snowbird-season-shipping-car-to-florida</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rastamanlogistics.com/blog/what-to-know-about-door-to-door-vehicle-delivery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- 48 State Landing Pages -->
   <url>
     <loc>https://rastamanlogistics.com/car-shipping-alabama</loc>
