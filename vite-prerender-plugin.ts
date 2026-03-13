@@ -1,10 +1,9 @@
-
 import { Plugin, ResolvedConfig } from "vite";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
 import * as cheerio from "cheerio";
-import { Window } from "linkedom"; // No Document needed, Window provides it
+import { parseHTML } from "linkedom"; // Correct import for linkedom
 
 // -----------------------------------------------------------------------------
 //   CONFIGURATION
@@ -41,10 +40,9 @@ const ENTRY_SERVER = "src/entry-server.tsx";
 // -----------------------------------------------------------------------------
 
 function setupPolyfills() {
-  // Base mock document (linkedom provides a lightweight DOM)
-  const { window, document } = new Window(
-    `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`,
-    { url: "https://rastamanlogistics.vercel.app" } // Match your origin
+  // Use parseHTML to create window and document (correct linkedom API)
+  const { window, document } = parseHTML(
+    `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`
   );
 
   // Expose globals safely (use defineProperty to override read-only ones like navigator)
@@ -142,81 +140,4 @@ export default function prerenderPlugin(): Plugin {
           ssr: true,
           outDir: path.join(outDir, ".ssr-temp"),
           rollupOptions: {
-            input: path.resolve(config.root, ENTRY_SERVER),
-          },
-          emptyOutDir: false,
-        },
-        logLevel: "warn",
-      });
-
-      const ssrOutDir = path.join(outDir, ".ssr-temp");
-      const entryPath = path.join(ssrOutDir, "entry-server.js"); // Vite outputs .js
-      const entryUrl = pathToFileURL(entryPath).href;
-
-      let render: (url: string) => Promise<{ html: string; head?: string }>;
-      try {
-        const mod = await import(entryUrl);
-        render = mod.render; // Matches your export
-      } catch (err) {
-        console.error("[prerender] Failed to load SSR entry:", err);
-        return;
-      }
-
-      // Collect routes dynamically
-      let routes: string[] = [];
-      try {
-        const { routeConfig } = await import(path.resolve(config.root, "src/routes.tsx"));
-        routes = routeConfig.map((r: { path: string }) => r.path).filter(Boolean);
-        console.log("[prerender] Loaded dynamic routes from src/routes.tsx");
-      } catch (err) {
-        console.warn("[prerender] Failed to load src/routes.tsx:", err);
-      }
-
-      // Add dynamic states
-      let stateRoutes: string[] = FALLBACK_STATE_ROUTES; // Default to fallback
-      try {
-        const statesModule = await import(path.resolve(config.root, "src/data/states.ts"));
-        const states = statesModule.states || statesModule.default; // Assume exported as 'states' or default
-        stateRoutes = states.map((s: string) => `/car-shipping-${s.toLowerCase().replace(/\s+/g, '-')}`);
-        console.log("[prerender] Loaded dynamic states from src/data/states.ts");
-      } catch (err) {
-        console.warn("[prerender] Failed to load src/data/states.ts, using fallback:", err);
-      }
-
-      // Merge all
-      routes = [...new Set([...routes, ...FALLBACK_ROUTES, ...stateRoutes])]; // Dedupe
-
-      console.log(`[prerender] Prerendering ${routes.length} routes...`);
-
-      // Render loop
-      for (const route of routes) {
-        try {
-          const timer = Date.now();
-          const { html: appHtml, head = "" } = await render(route);
-
-          const $ = cheerio.load(template);
-          $("#root").html(appHtml);
-          if (head) $("head").append(head);
-
-          let filePath = route === "/" ? "index.html" : `${route.slice(1)}/index.html`;
-          if (route === "/404") filePath = "404.html";
-
-          const dir = path.join(outDir, path.dirname(filePath));
-          if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-
-          fs.writeFileSync(path.join(outDir, filePath), $.html(), "utf-8");
-          console.log(`[prerender] ✓ ${route} (${Date.now() - timer}ms)`);
-        } catch (err) {
-          console.error(`[prerender] ✗ ${route}:`, err);
-        }
-      }
-
-      // For faster builds: await Promise.all(routes.map(async (route) => { ... }));
-
-      // Cleanup
-      fs.rmSync(ssrOutDir, { recursive: true, force: true });
-
-      console.log(`[prerender] Done in ${Date.now() - start}ms`);
-    },
-  };
-}
+            input: path.resolve(config.root
