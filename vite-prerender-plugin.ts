@@ -15,6 +15,7 @@ const ROUTES = [
   "/about",
   "/reviews",
   "/contact",
+  "/gallery",
   "/car-shipping-alabama",
   "/car-shipping-arizona",
   "/car-shipping-arkansas",
