@@ -46,11 +46,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://rastamanlogistics.com/gallery</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://rastamanlogistics.com/reviews</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

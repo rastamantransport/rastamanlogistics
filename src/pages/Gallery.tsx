@@ -33,6 +33,7 @@ const Gallery = () => {
         title="Auto Transport Gallery | Vehicles We've Shipped Nationwide"
         description="Browse photos of luxury, classic, and exotic vehicles shipped by Rastaman Logistics. Porsche, Ferrari, Tesla, and more — safely transported coast to coast."
         canonical="https://rastamanlogistics.com/gallery"
+        robots="noindex"
       />
       <Navbar />
       <main className="pt-16">
