@@ -3,6 +3,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { states } from "@/data/states";
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
@@ -44,8 +45,11 @@ export const AppRoutes = () => (
     <Route path="/reviews" element={<Reviews />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
+    {/* Explicit state routes — no broad /:stateSlug catch-all */}
     <Route path="/car-shipping/:stateName" element={<StateShipping />} />
-    <Route path="/:stateSlug" element={<StateShipping />} />
+    {states.map((s) => (
+      <Route key={s.slug} path={`/${s.slug}`} element={<StateShipping />} />
+    ))}
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
