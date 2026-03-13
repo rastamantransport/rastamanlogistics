@@ -220,6 +220,7 @@ export default function prerenderPlugin(): Plugin {
 
       const template = fs.readFileSync(templatePath, "utf-8");
 
+      const savedGlobals = saveGlobals();
       try {
         // Step 1: Build SSR bundle, filtering out THIS plugin to avoid recursion
         setupMinimalGlobals();
