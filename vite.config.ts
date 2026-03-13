@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), imagetools(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react(), imagetools(), mode === "development" && componentTagger(), prerenderPlugin()].filter(Boolean),
   build: {
     target: "esnext",
     cssCodeSplit: true,
