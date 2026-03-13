@@ -205,22 +205,30 @@ function setupMinimalGlobals() {
     },
   };
 
-  (global as any).window = mockWindow;
-  (global as any).document = mockDocument;
-  (global as any).localStorage = mockStorage;
-  (global as any).sessionStorage = mockStorage;
-  (global as any).navigator = mockWindow.navigator;
-  (global as any).location = mockWindow.location;
-  (global as any).history = mockWindow.history;
-  (global as any).CustomEvent = mockWindow.CustomEvent;
-  (global as any).Event = mockWindow.Event;
-  (global as any).MutationObserver = mockWindow.MutationObserver;
-  (global as any).ResizeObserver = mockWindow.ResizeObserver;
-  (global as any).IntersectionObserver = mockWindow.IntersectionObserver;
-  (global as any).matchMedia = mockWindow.matchMedia;
-  (global as any).getComputedStyle = mockWindow.getComputedStyle;
-  (global as any).requestAnimationFrame = mockWindow.requestAnimationFrame;
-  (global as any).cancelAnimationFrame = mockWindow.cancelAnimationFrame;
+  const safeSet = (obj: any, key: string, value: any) => {
+    try {
+      obj[key] = value;
+    } catch {
+      Object.defineProperty(obj, key, { value, writable: true, configurable: true });
+    }
+  };
+
+  safeSet(global, "window", mockWindow);
+  safeSet(global, "document", mockDocument);
+  safeSet(global, "localStorage", mockStorage);
+  safeSet(global, "sessionStorage", mockStorage);
+  safeSet(global, "navigator", mockWindow.navigator);
+  safeSet(global, "location", mockWindow.location);
+  safeSet(global, "history", mockWindow.history);
+  safeSet(global, "CustomEvent", mockWindow.CustomEvent);
+  safeSet(global, "Event", mockWindow.Event);
+  safeSet(global, "MutationObserver", mockWindow.MutationObserver);
+  safeSet(global, "ResizeObserver", mockWindow.ResizeObserver);
+  safeSet(global, "IntersectionObserver", mockWindow.IntersectionObserver);
+  safeSet(global, "matchMedia", mockWindow.matchMedia);
+  safeSet(global, "getComputedStyle", mockWindow.getComputedStyle);
+  safeSet(global, "requestAnimationFrame", mockWindow.requestAnimationFrame);
+  safeSet(global, "cancelAnimationFrame", mockWindow.cancelAnimationFrame);
 }
 
 const PLUGIN_NAME = "vite-prerender-plugin";
