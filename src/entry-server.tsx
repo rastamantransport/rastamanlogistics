@@ -4,6 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { states } from "@/data/states";
 
 // Eager imports for SSR (no lazy loading)
 import Index from "./pages/Index";
@@ -38,7 +39,9 @@ function ServerRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<Reviews />} />
       <Route path="/car-shipping/:stateName" element={<StateShipping />} />
-      <Route path="/:stateSlug" element={<StateShipping />} />
+      {states.map((s) => (
+        <Route key={s.slug} path={`/${s.slug}`} element={<StateShipping />} />
+      ))}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

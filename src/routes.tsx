@@ -21,8 +21,6 @@ export const redirects = [
   { from: "/quote", to: "/car-shipping-calculator" },
 ] as const;
 
-// State pages use dynamic route patterns
-export const stateRoutePatterns = [
-  "/car-shipping/:stateName",
-  "/:stateSlug",
-] as const;
+// State pages use explicit routes per state slug (from src/data/states.ts)
+// The broad /:stateSlug catch-all has been removed to prevent unintended matches.
+// A /car-shipping/:stateName dynamic route is kept for backward compatibility.
