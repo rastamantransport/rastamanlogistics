@@ -1,0 +1,24 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "prerender": {
+    "enabled": true,
+    "routes": [
+      "/",
+      "/services",
+      "/open-auto-transport",
+      "/enclosed-auto-transport",
+      "/door-to-door-shipping",
+      "/expedited-car-shipping",
+      "/car-shipping-calculator",
+      "/how-it-works",
+      "/about",
+      "/reviews",
+      "/contact"
+    ]
+  },
+  "rewrites": [
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ]
+}
