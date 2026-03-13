@@ -32,6 +32,11 @@ export default function prerenderPlugin(): Plugin {
       // Only run for the client build (skip if SSR build)
       if (config.build.ssr) return;
 
+      // Polyfill browser globals for SSR
+(global as any).window = { localStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} } };
+(global as any).localStorage = (global as any).window.localStorage;
+(global as any).document = { cookie: '', querySelector: () => null };
+
       const outDir = path.resolve(config.root, config.build.outDir || "dist");
       const templatePath = path.join(outDir, "index.html");
 
