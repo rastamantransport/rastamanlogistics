@@ -22,6 +22,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Reviews = lazy(() => import("./pages/Reviews"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const StateShipping = lazy(() => import("./pages/StateShipping"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
