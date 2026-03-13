@@ -19,7 +19,9 @@ export function render(url: string) {
     </HelmetProvider>
   );
 
-  const helmet = helmetContext.helmet;
+  const helmet = helmetContext.helmet as
+    | Record<string, { toString(): string }>
+    | undefined;
   const head = helmet
     ? [
         helmet.title?.toString() ?? "",
