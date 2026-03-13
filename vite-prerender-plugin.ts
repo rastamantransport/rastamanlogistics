@@ -1,15 +1,20 @@
+
 import { Plugin, ResolvedConfig } from "vite";
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
+import * as cheerio from "cheerio";
+import { Window } from "linkedom"; // No Document needed, Window provides it
 
 // -----------------------------------------------------------------------------
 //   CONFIGURATION
 // -----------------------------------------------------------------------------
 
+// Fallback hardcoded routes (your originals minus states for now)
 const FALLBACK_ROUTES = ["/", "/404"];
 
-const STATE_ROUTES = [
+// Fallback hardcoded state routes (in case dynamic import fails)
+const FALLBACK_STATE_ROUTES = [
   "/car-shipping-alabama", "/car-shipping-arizona", "/car-shipping-arkansas",
   "/car-shipping-california", "/car-shipping-colorado", "/car-shipping-connecticut",
   "/car-shipping-delaware", "/car-shipping-florida", "/car-shipping-georgia",
@@ -28,7 +33,73 @@ const STATE_ROUTES = [
   "/car-shipping-west-virginia", "/car-shipping-wisconsin", "/car-shipping-wyoming",
 ];
 
+// Your server entry
 const ENTRY_SERVER = "src/entry-server.tsx";
+
+// -----------------------------------------------------------------------------
+//   IMPROVED POLYFILLS (linkedom-based)
+// -----------------------------------------------------------------------------
+
+function setupPolyfills() {
+  // Base mock document (linkedom provides a lightweight DOM)
+  const { window, document } = new Window(
+    `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`,
+    { url: "https://rastamanlogistics.vercel.app" } // Match your origin
+  );
+
+  // Expose globals safely (use defineProperty to override read-only ones like navigator)
+  (global as any).window = window;
+  (global as any).document = document;
+  (global as any).localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
+  (global as any).sessionStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
+
+  // Safe override for navigator (Vercel/Node 20+ has read-only version)
+  Object.defineProperty(global, 'navigator', {
+    value: window.navigator,
+    writable: true,
+    configurable: true,
+  });
+
+  // Same for location and history (prevents similar future errors)
+  Object.defineProperty(global, 'location', {
+    value: window.location,
+    writable: true,
+    configurable: true,
+  });
+  Object.defineProperty(global, 'history', {
+    value: window.history,
+    writable: true,
+    configurable: true,
+  });
+
+  // Extras for common libs (React Query, Helmet, Router)
+  window.CustomEvent = class CustomEvent extends Event {
+    detail: any;
+    constructor(type: string, eventInitDict?: CustomEventInit) {
+      super(type, eventInitDict);
+      this.detail = eventInitDict?.detail ?? null;
+    }
+  } as any;
+
+  window.getComputedStyle = (elt: Element) => ({
+    getPropertyValue: (prop: string) => "",
+  } as CSSStyleDeclaration);
+
+  class FakeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  window.MutationObserver = FakeObserver as any;
+  window.ResizeObserver = FakeObserver as any;
+  window.IntersectionObserver = FakeObserver as any;
+
+  window.matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} }) as any;
+  window.requestAnimationFrame = (cb: any) => setTimeout(cb, 0);
+  window.cancelAnimationFrame = (id: any) => clearTimeout(id);
+
+  console.log("[prerender] Polyfills applied (linkedom + safe overrides for Vercel/Node)");
+}
 
 // -----------------------------------------------------------------------------
 //   PLUGIN
@@ -49,34 +120,7 @@ export default function prerenderPlugin(): Plugin {
       const start = Date.now();
       console.log("[prerender] Starting...");
 
-      // Dynamic imports to avoid breaking dev server
-      const cheerio = await import("cheerio");
-      const linkedom = await import("linkedom");
-
-      // Setup polyfills
-      const { parseHTML } = linkedom;
-      const { document, window } = parseHTML(
-        `<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>`
-      );
-
-      (global as any).window = window;
-      (global as any).document = document;
-      (global as any).navigator = (window as any).navigator ?? { userAgent: "" };
-      (global as any).location = (window as any).location ?? { href: "", pathname: "/" };
-      (global as any).history = (window as any).history ?? { pushState: () => {}, replaceState: () => {} };
-      (global as any).localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
-      (global as any).sessionStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
-
-      (window as any).matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} });
-      (window as any).requestAnimationFrame = (cb: any) => setTimeout(cb, 0);
-      (window as any).cancelAnimationFrame = (id: any) => clearTimeout(id);
-
-      class FakeObserver { observe() {} unobserve() {} disconnect() {} }
-      (window as any).MutationObserver = FakeObserver;
-      (window as any).ResizeObserver = FakeObserver;
-      (window as any).IntersectionObserver = FakeObserver;
-
-      console.log("[prerender] Polyfills applied");
+      setupPolyfills();
 
       const outDir = path.resolve(config.root, config.build.outDir || "dist");
       const templatePath = path.join(outDir, "index.html");
@@ -90,12 +134,11 @@ export default function prerenderPlugin(): Plugin {
 
       // Build SSR bundle
       const { build } = await import("vite");
-      const ssrConfig: any = {
-        root: config.root,
-        base: config.base,
-        publicDir: false,
-        plugins: [],
+      await build({
+        ...config, // Reuse full config
+        plugins: [], // Avoid recursion
         build: {
+          ...config.build,
           ssr: true,
           outDir: path.join(outDir, ".ssr-temp"),
           rollupOptions: {
@@ -103,36 +146,49 @@ export default function prerenderPlugin(): Plugin {
           },
           emptyOutDir: false,
         },
-        resolve: config.resolve,
-        logLevel: "warn" as const,
-      };
-      await build(ssrConfig);
+        logLevel: "warn",
+      });
 
       const ssrOutDir = path.join(outDir, ".ssr-temp");
-      const entryPath = path.join(ssrOutDir, "entry-server.js");
+      const entryPath = path.join(ssrOutDir, "entry-server.js"); // Vite outputs .js
       const entryUrl = pathToFileURL(entryPath).href;
 
       let render: (url: string) => Promise<{ html: string; head?: string }>;
       try {
         const mod = await import(entryUrl);
-        render = mod.render;
+        render = mod.render; // Matches your export
       } catch (err) {
         console.error("[prerender] Failed to load SSR entry:", err);
         return;
       }
 
-      // Collect routes
+      // Collect routes dynamically
       let routes: string[] = [];
       try {
         const { routeConfig } = await import(path.resolve(config.root, "src/routes.tsx"));
         routes = routeConfig.map((r: { path: string }) => r.path).filter(Boolean);
-      } catch {
-        console.warn("[prerender] Could not load src/routes.tsx, using fallbacks");
+        console.log("[prerender] Loaded dynamic routes from src/routes.tsx");
+      } catch (err) {
+        console.warn("[prerender] Failed to load src/routes.tsx:", err);
       }
 
-      routes = [...new Set([...routes, ...FALLBACK_ROUTES, ...STATE_ROUTES])];
+      // Add dynamic states
+      let stateRoutes: string[] = FALLBACK_STATE_ROUTES; // Default to fallback
+      try {
+        const statesModule = await import(path.resolve(config.root, "src/data/states.ts"));
+        const states = statesModule.states || statesModule.default; // Assume exported as 'states' or default
+        stateRoutes = states.map((s: string) => `/car-shipping-${s.toLowerCase().replace(/\s+/g, '-')}`);
+        console.log("[prerender] Loaded dynamic states from src/data/states.ts");
+      } catch (err) {
+        console.warn("[prerender] Failed to load src/data/states.ts, using fallback:", err);
+      }
+
+      // Merge all
+      routes = [...new Set([...routes, ...FALLBACK_ROUTES, ...stateRoutes])]; // Dedupe
+
       console.log(`[prerender] Prerendering ${routes.length} routes...`);
 
+      // Render loop
       for (const route of routes) {
         try {
           const timer = Date.now();
@@ -155,7 +211,11 @@ export default function prerenderPlugin(): Plugin {
         }
       }
 
+      // For faster builds: await Promise.all(routes.map(async (route) => { ... }));
+
+      // Cleanup
       fs.rmSync(ssrOutDir, { recursive: true, force: true });
+
       console.log(`[prerender] Done in ${Date.now() - start}ms`);
     },
   };
