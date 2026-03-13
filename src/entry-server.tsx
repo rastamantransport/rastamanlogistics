@@ -44,7 +44,7 @@ function ServerRoutes() {
   );
 }
 
-export function render(url: string) {
+export async function render(url: string): Promise<{ html: string; head: string }> {
   const queryClient = new QueryClient();
   const helmetContext = {} as any;
 
