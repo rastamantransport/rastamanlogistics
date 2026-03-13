@@ -89,6 +89,7 @@ const AdminLogin = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
