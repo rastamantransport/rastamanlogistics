@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Star, Check, X, LogOut, Loader2 } from "lucide-react";
@@ -99,7 +100,11 @@ const AdminDashboard = () => {
   const pendingCount = reviews?.filter((r) => !r.approved).length ?? 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-background/90 backdrop-blur-md sticky top-0 z-40">
         <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-14">
           <h1 className="text-lg font-bold font-display text-foreground">
@@ -211,6 +216,7 @@ const AdminDashboard = () => {
         )}
       </main>
     </div>
+    </>
   );
 };
 
