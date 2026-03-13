@@ -226,11 +226,15 @@ export default function prerenderPlugin(): Plugin {
             route === "/"
               ? path.join(outDir, "index.html")
               : path.join(outDir, route.slice(1), "index.html");
-          const dir = path.dirname(filePath);
-          if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-          }
-          fs.writeFileSync(filePath, finalHtml);
+          const filePath =
+  route === "/"
+    ? path.join(outDir, "index.html")
+    : path.join(outDir, route.slice(1) + ".html");
+const dir = path.dirname(filePath);
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+fs.writeFileSync(filePath, finalHtml);
           console.log(`[prerender] ✓ ${route}`);
         } catch (err) {
           console.error(`[prerender] ✗ ${route}:`, err);
