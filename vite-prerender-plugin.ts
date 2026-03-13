@@ -209,9 +209,33 @@ export default function prerenderPlugin(): Plugin {
       const { render } = await import(entryUrl);
 
       console.log(`[prerender] Prerendering ${ROUTES.length} routes...`);
-      for (const route of ROUTES) {
-        try {
-          const { html: appHtml, head } = render(route);
+await Promise.all(
+  ROUTES.map(async (route) => {
+    try {
+      const { html: appHtml, head } = render(route);
+      let finalHtml = template;
+      finalHtml = finalHtml.replace(
+        '<div id="root"></div>',
+        `<div id="root">${appHtml}</div>`
+      );
+      if (head) {
+        finalHtml = finalHtml.replace("</head>", `${head}\n</head>`);
+      }
+      const filePath =
+        route === "/"
+          ? path.join(outDir, "index.html")
+          : path.join(outDir, route.slice(1) + ".html");
+      const dir = path.dirname(filePath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(filePath, finalHtml);
+      console.log(`[prerender] ✓ ${route}`);
+    } catch (err) {
+      console.error(`[prerender] ✗ ${route}:`, err);
+    }
+  })
+);
           let finalHtml = template;
           finalHtml = finalHtml.replace(
             '<div id="root"></div>',
