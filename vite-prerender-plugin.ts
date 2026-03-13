@@ -230,6 +230,10 @@ export default function prerenderPlugin(): Plugin {
           root: config.root,
           resolve: config.resolve,
           plugins: config.plugins.filter((p) => p.name !== PLUGIN_NAME),
+          ssr: {
+            // Bundle all dependencies so they use our mocked globals
+            noExternal: true,
+          },
           build: {
             ssr: true,
             outDir: ssrOutDir,
