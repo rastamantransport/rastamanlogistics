@@ -58,7 +58,7 @@ const OpenAutoTransport = () => (
                 Whether you're relocating, buying a car out of state, or moving for military deployment, open transport delivers reliable, affordable shipping with door-to-door convenience.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link to="/quote">
+                <Link to="/car-shipping-calculator">
                   <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
                     Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
