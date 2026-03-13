@@ -13,7 +13,7 @@ const StickyCallButton = () => {
         <span className="text-sm">Call Now</span>
       </a>
       <Link
-        to="/quote"
+        to="/car-shipping-calculator"
         className="flex items-center rounded-full bg-gradient-gold px-5 py-3 text-primary-foreground font-semibold shadow-lg hover:opacity-90 transition-opacity"
       >
         <span className="text-sm">Get Free Quote</span>

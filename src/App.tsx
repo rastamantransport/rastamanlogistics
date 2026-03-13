@@ -2,14 +2,14 @@ import { lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
 const StickyCallButton = lazy(() => import("./components/StickyCallButton"));
 
 const Index = lazy(() => import("./pages/Index"));
-const Quote = lazy(() => import("./pages/Quote"));
+const CarShippingCalculator = lazy(() => import("./pages/CarShippingCalculator"));
 const Services = lazy(() => import("./pages/Services"));
 const OpenAutoTransport = lazy(() => import("./pages/OpenAutoTransport"));
 const EnclosedAutoTransport = lazy(() => import("./pages/EnclosedAutoTransport"));
@@ -29,7 +29,8 @@ const queryClient = new QueryClient();
 export const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Index />} />
-    <Route path="/quote" element={<Quote />} />
+    <Route path="/car-shipping-calculator" element={<CarShippingCalculator />} />
+    <Route path="/quote" element={<Navigate to="/car-shipping-calculator" replace />} />
     <Route path="/services" element={<Services />} />
     <Route path="/open-auto-transport" element={<OpenAutoTransport />} />
     <Route path="/enclosed-auto-transport" element={<EnclosedAutoTransport />} />

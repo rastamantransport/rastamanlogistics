@@ -26,14 +26,14 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rastamanlogistics.com/car-shipping-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://rastamanlogistics.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://rastamanlogistics.com/quote</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://rastamanlogistics.com/how-it-works</loc>

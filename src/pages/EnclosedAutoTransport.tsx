@@ -62,7 +62,7 @@ const EnclosedAutoTransport = () => (
                 This premium shipping method is the top choice for owners of luxury sedans, exotic supercars, vintage classics, and custom show vehicles. Every carrier in our enclosed network is hand-selected for their expertise in handling high-value automobiles.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link to="/quote">
+                <Link to="/car-shipping-calculator">
                   <Button className="bg-gradient-gold text-primary-foreground font-semibold hover:opacity-90">
                     Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
@@ -116,7 +116,7 @@ const EnclosedAutoTransport = () => (
             Protect Your Investment
           </h2>
           <p className="text-white/65 mb-8 max-w-md mx-auto">Get a free enclosed transport quote and ship with confidence.</p>
-          <Link to="/quote">
+          <Link to="/car-shipping-calculator">
             <Button size="lg" className="bg-gradient-gold text-primary-foreground font-bold px-8 hover:opacity-90">
               Get Free Quote <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
