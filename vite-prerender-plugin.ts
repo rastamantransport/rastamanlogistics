@@ -17,49 +17,139 @@ const ROUTES = [
   "/contact",
 ];
 
+function setupPolyfills() {
+  const mockLocalStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
+    length: 0,
+    key: () => null,
+  };
+
+  const mockElement = {
+    style: {},
+    setAttribute: () => {},
+    getAttribute: () => null,
+    appendChild: () => {},
+    removeChild: () => {},
+    classList: { add: () => {}, remove: () => {}, contains: () => false, toggle: () => {} },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    innerHTML: '',
+    textContent: '',
+    children: [],
+    childNodes: [],
+  };
+
+  const mockDocument = {
+    cookie: '',
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    getElementsByTagName: () => [],
+    getElementsByClassName: () => [],
+    getElementById: () => null,
+    createElement: () => ({ ...mockElement }),
+    createTextNode: () => ({}),
+    createElementNS: () => ({ ...mockElement }),
+    head: { appendChild: () => {}, removeChild: () => {}, children: [] },
+    body: { appendChild: () => {}, removeChild: () => {}, style: {}, children: [] },
+    documentElement: {
+      style: {},
+      setAttribute: () => {},
+      getAttribute: () => null,
+      lang: 'en',
+      classList: { add: () => {}, remove: () => {}, contains: () => false },
+    },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => true,
+    readyState: 'complete',
+  };
+
+  const mockWindow = {
+    document: mockDocument,
+    localStorage: mockLocalStorage,
+    sessionStorage: mockLocalStorage,
+    location: { href: '/', pathname: '/', search: '', hash: '', origin: 'https://rastamanlogistics.com' },
+    history: { pushState: () => {}, replaceState: () => {}, back: () => {} },
+    navigator: { userAgent: 'node', language: 'en-US', languages: ['en-US'] },
+    screen: { width: 1280, height: 800 },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => true,
+    getComputedStyle: () => ({ getPropertyValue: () => '', setProperty: () => {} }),
+    matchMedia: () => ({ matches: false, addListener: () => {}, removeListener: () => {}, addEventListener: () => {}, removeEventListener: () => {} }),
+    scrollTo: () => {},
+    scrollX: 0,
+    scrollY: 0,
+    innerWidth: 1280,
+    innerHeight: 800,
+    requestAnimationFrame: (cb: any) => setTimeout(cb, 0),
+    cancelAnimationFrame: (id: any) => clearTimeout(id),
+    setTimeout,
+    clearTimeout,
+    setInterval,
+    clearInterval,
+    console,
+    CSS: { supports: () => false },
+    CustomEvent: class CustomEvent { constructor() {} },
+    Event: class Event { constructor() {} },
+    MutationObserver: class MutationObserver { observe() {} disconnect() {} takeRecords() { return []; } },
+    ResizeObserver: class ResizeObserver { observe() {} disconnect() {} unobserve() {} },
+    IntersectionObserver: class IntersectionObserver { observe() {} disconnect() {} unobserve() {} },
+  };
+
+  (global as any).window = mockWindow;
+  (global as any).document = mockDocument;
+  (global as any).localStorage = mockLocalStorage;
+  (global as any).sessionStorage = mockLocalStorage;
+  (global as any).navigator = mockWindow.navigator;
+  (global as any).location = mockWindow.location;
+  (global as any).history = mockWindow.history;
+  (global as any).CustomEvent = mockWindow.CustomEvent;
+  (global as any).Event = mockWindow.Event;
+  (global as any).MutationObserver = mockWindow.MutationObserver;
+  (global as any).ResizeObserver = mockWindow.ResizeObserver;
+  (global as any).IntersectionObserver = mockWindow.IntersectionObserver;
+  (global as any).matchMedia = mockWindow.matchMedia;
+  (global as any).getComputedStyle = mockWindow.getComputedStyle;
+  (global as any).requestAnimationFrame = mockWindow.requestAnimationFrame;
+  (global as any).cancelAnimationFrame = mockWindow.cancelAnimationFrame;
+}
+
 export default function prerenderPlugin(): Plugin {
   let config: ResolvedConfig;
-
   return {
     name: "vite-prerender-plugin",
     apply: "build",
-
     configResolved(resolvedConfig) {
       config = resolvedConfig;
     },
-
     async closeBundle() {
-      // Only run for the client build (skip if SSR build)
       if (config.build.ssr) return;
 
-      // Polyfill browser globals for SSR
-(global as any).window = { localStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} } };
-(global as any).localStorage = (global as any).window.localStorage;
-(global as any).document = { cookie: '', querySelector: () => null };
+      setupPolyfills();
 
       const outDir = path.resolve(config.root, config.build.outDir || "dist");
       const templatePath = path.join(outDir, "index.html");
-
       if (!fs.existsSync(templatePath)) {
         console.warn("[prerender] No dist/index.html found, skipping.");
         return;
       }
-
       const template = fs.readFileSync(templatePath, "utf-8");
 
-      // Build the server entry
       const { build } = await import("vite");
-      const ssrResult = await build({
+      await build({
         root: config.root,
         resolve: config.resolve,
-        plugins: [], // minimal plugins for SSR
+        plugins: [],
         build: {
           ssr: true,
           outDir: path.join(outDir, ".ssr-temp"),
           rollupOptions: {
             input: path.resolve(config.root, "src/entry-server.tsx"),
           },
-          // Don't empty outDir since it's inside dist
           emptyOutDir: false,
         },
         logLevel: "warn",
@@ -71,35 +161,25 @@ export default function prerenderPlugin(): Plugin {
       const { render } = await import(entryUrl);
 
       console.log(`[prerender] Prerendering ${ROUTES.length} routes...`);
-
       for (const route of ROUTES) {
         try {
           const { html: appHtml, head } = render(route);
-
           let finalHtml = template;
-
-          // Inject rendered HTML into the root div
           finalHtml = finalHtml.replace(
             '<div id="root"></div>',
             `<div id="root">${appHtml}</div>`
           );
-
-          // Inject head tags before </head>
           if (head) {
             finalHtml = finalHtml.replace("</head>", `${head}\n</head>`);
           }
-
-          // Write the file
           const filePath =
             route === "/"
               ? path.join(outDir, "index.html")
               : path.join(outDir, route.slice(1), "index.html");
-
           const dir = path.dirname(filePath);
           if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
           }
-
           fs.writeFileSync(filePath, finalHtml);
           console.log(`[prerender] ✓ ${route}`);
         } catch (err) {
@@ -107,7 +187,6 @@ export default function prerenderPlugin(): Plugin {
         }
       }
 
-      // Cleanup temp SSR build
       fs.rmSync(ssrOutDir, { recursive: true, force: true });
       console.log("[prerender] Done.");
     },
