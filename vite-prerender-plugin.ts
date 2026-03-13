@@ -53,7 +53,7 @@ function setupPolyfills() {
     createElement: () => ({ ...mockElement }),
     createTextNode: () => ({}),
     createElementNS: () => ({ ...mockElement }),
-    head: { appendChild: () => {}, removeChild: () => {}, children: [] },
+    head: { appendChild: () => {}, removeChild: () => {}, children: [], querySelectorAll: () => [], querySelector: () => null, getElementsByTagName: () => [] },
     body: { appendChild: () => {}, removeChild: () => {}, style: {}, children: [] },
     documentElement: {
       style: {},
