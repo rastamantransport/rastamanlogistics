@@ -37,6 +37,7 @@ function ServerRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<Reviews />} />
+      <Route path="/car-shipping-:state" element={<StateShipping />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
