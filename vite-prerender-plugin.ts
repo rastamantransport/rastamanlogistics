@@ -233,7 +233,7 @@ export default function prerenderPlugin(): Plugin {
 
         for (const route of ROUTES) {
           try {
-            const { html: appHtml, head } = render(route);
+           const { html: appHtml, head } = await render(route);
             let finalHtml = template.replace(
               '<div id="root"></div>',
               `<div id="root">${appHtml}</div>`
