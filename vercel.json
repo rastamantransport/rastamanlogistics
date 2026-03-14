@@ -2,8 +2,5 @@
   "buildCommand": "echo skip",
   "outputDirectory": "dist",
   "trailingSlash": false,
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/(:path*)", "destination": "/:path*/index.html" }
-  ]
+  "cleanUrls": true
 }
