@@ -7,10 +7,3 @@
     { "source": "/(:path*)", "destination": "/:path*/index.html" }
   ]
 }
-```
-
-Save, then:
-```
-git add -A
-git commit -m "fix routing with path rewrite"
-git push
