@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 const Footer = () => (
   <footer className="bg-card border-t border-border">
     <div className="container mx-auto px-4 lg:px-8 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div>
           <p className="text-lg font-bold font-display text-foreground mb-4">
             RASTAMAN<span className="text-primary"> LOGISTICS</span>
@@ -59,6 +59,26 @@ const Footer = () => (
             <li className="flex items-start gap-2 text-sm text-muted-foreground">
               <MapPin className="w-4 h-4 text-primary mt-0.5" /> Nationwide Service, USA
             </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Top States</p>
+          <ul className="space-y-2">
+            {[
+              { label: "California", slug: "car-shipping-california" },
+              { label: "Texas", slug: "car-shipping-texas" },
+              { label: "Florida", slug: "car-shipping-florida" },
+              { label: "New York", slug: "car-shipping-new-york" },
+              { label: "Illinois", slug: "car-shipping-illinois" },
+              { label: "Georgia", slug: "car-shipping-georgia" },
+              { label: "Arizona", slug: "car-shipping-arizona" },
+              { label: "Washington", slug: "car-shipping-washington" },
+            ].map((s) => (
+              <li key={s.slug}>
+                <Link to={`/${s.slug}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">{s.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

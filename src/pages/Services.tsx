@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Truck, Shield, MapPin, Clock } from "lucide-react";
+import { states } from "@/data/states";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -79,6 +80,30 @@ const Services = () => (
                 Get a Free Quote <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* State Links Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground text-center mb-4">
+            Car Shipping to All <span className="text-gradient-gold">48 States</span>
+          </h2>
+          <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
+            We provide auto transport services across the contiguous United States. Select your state to learn about routes, pricing, and transit times.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 max-w-6xl mx-auto">
+            {states.map((state) => (
+              <Link
+                key={state.slug}
+                to={`/${state.slug}`}
+                className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-card border border-border text-sm font-medium text-foreground hover:border-primary/50 hover:text-primary transition-colors"
+              >
+                <span className="text-muted-foreground text-xs font-mono">{state.abbreviation}</span>
+                <span className="truncate">{state.name}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -25,6 +25,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const CarShippingStates = lazy(() => import("./pages/CarShippingStates"));
 const StateShipping = lazy(() => import("./pages/StateShipping"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -49,6 +50,7 @@ export const AppRoutes = () => (
     <Route path="/blog/:slug" element={<BlogPost />} />
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/car-shipping-states" element={<CarShippingStates />} />
     {/* Explicit state routes — no broad /:stateSlug catch-all */}
     <Route path="/car-shipping/:stateName" element={<StateShipping />} />
     {states.map((s) => (

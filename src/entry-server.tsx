@@ -22,6 +22,7 @@ import Reviews from "./pages/Reviews";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import StateShipping from "./pages/StateShipping";
+import CarShippingStates from "./pages/CarShippingStates";
 import NotFound from "./pages/NotFound";
 
 function ServerRoutes() {
@@ -40,6 +41,7 @@ function ServerRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<Reviews />} />
+      <Route path="/car-shipping-states" element={<CarShippingStates />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/car-shipping/:stateName" element={<StateShipping />} />

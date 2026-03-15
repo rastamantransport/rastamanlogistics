@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Truck, ArrowRight, CheckCircle, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import AllStatesLinks from "@/components/AllStatesLinks";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import FAQSection from "@/components/FAQSection";
@@ -123,6 +124,7 @@ const OpenAutoTransport = () => (
         </div>
       </section>
     </main>
+      <AllStatesLinks />
     <Footer />
   </div>
 );

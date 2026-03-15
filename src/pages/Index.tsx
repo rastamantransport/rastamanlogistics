@@ -135,6 +135,54 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Popular State Routes */}
+      <section className="py-20 bg-card">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground mb-3">
+              Popular State Routes
+            </h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              We ship vehicles to and from every corner of the country. Explore our most popular state routes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+            {[
+              { name: "California", slug: "car-shipping-california" },
+              { name: "Texas", slug: "car-shipping-texas" },
+              { name: "Florida", slug: "car-shipping-florida" },
+              { name: "New York", slug: "car-shipping-new-york" },
+              { name: "Illinois", slug: "car-shipping-illinois" },
+              { name: "Georgia", slug: "car-shipping-georgia" },
+              { name: "Arizona", slug: "car-shipping-arizona" },
+              { name: "Colorado", slug: "car-shipping-colorado" },
+              { name: "Washington", slug: "car-shipping-washington" },
+              { name: "Nevada", slug: "car-shipping-nevada" },
+              { name: "North Carolina", slug: "car-shipping-north-carolina" },
+              { name: "Virginia", slug: "car-shipping-virginia" },
+            ].map((state) => (
+              <Link
+                key={state.slug}
+                to={`/${state.slug}`}
+                className="group flex flex-col items-center gap-2 rounded-lg border border-border bg-background p-4 text-center shadow-sm transition-all hover:shadow-md hover:border-primary/40 hover:-translate-y-0.5"
+              >
+                <Truck className="w-5 h-5 text-primary opacity-70 group-hover:opacity-100 transition-opacity" />
+                <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {state.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/car-shipping-states" className="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
+              View All States <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <TestimonialSection />
 

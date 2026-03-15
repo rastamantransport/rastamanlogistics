@@ -70,6 +70,7 @@ const ROUTES = [
   "/car-shipping-west-virginia",
   "/car-shipping-wisconsin",
   "/car-shipping-wyoming",
+  "/car-shipping-states",
 ];
 
 function setupPolyfills() {
