@@ -115,34 +115,34 @@ const StateShipping = () => {
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-3xl mx-auto prose prose-lg">
               <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-6">
-                Auto Transport Services in {name}
+                Car Shipping Services in {name}
               </h2>
               <p className="text-muted-foreground mb-4">
-                Rastaman Logistics provides reliable, fully insured auto transport to and from {name} ({abbreviation}).
+                Rastaman Logistics provides reliable, fully insured car shipping to and from {name} ({abbreviation}).
                 Whether you're relocating, buying a vehicle online, or heading south for the winter, our nationwide
                 network of vetted carriers ensures your car arrives safely and on time.
               </p>
               <p className="text-muted-foreground mb-4">
-                We offer both <Link to="/open-auto-transport" className="text-primary hover:underline">open auto transport</Link> and{" "}
-                <Link to="/enclosed-auto-transport" className="text-primary hover:underline">enclosed auto transport</Link> options
-                for shipments to {name}. Open transport is the most popular and affordable choice for standard vehicles, while
+                We offer both <Link to="/open-auto-transport" className="text-primary hover:underline">open car shipping</Link> and{" "}
+                <Link to="/enclosed-auto-transport" className="text-primary hover:underline">enclosed car shipping</Link> options
+                for shipments to {name}. Open transport is the most popular and affordable car shipping method for standard vehicles, while
                 enclosed transport provides premium protection for luxury, classic, or high-value cars.
               </p>
               <p className="text-muted-foreground mb-4">
-                Average shipping costs to {name} range from {avgShippingCost}, depending on distance, vehicle size, transport
+                Average car shipping costs to {name} range from {avgShippingCost}, depending on distance, vehicle size, transport
                 type, and seasonal demand. Transit times typically fall between {avgTransitDays} for most routes. We also offer{" "}
-                <Link to="/expedited-car-shipping" className="text-primary hover:underline">expedited shipping</Link> for
+                <Link to="/expedited-car-shipping" className="text-primary hover:underline">expedited car shipping</Link> for
                 time-sensitive deliveries and{" "}
-                <Link to="/door-to-door-shipping" className="text-primary hover:underline">door-to-door service</Link> for
+                <Link to="/door-to-door-shipping" className="text-primary hover:underline">door-to-door car shipping</Link> for
                 maximum convenience.
               </p>
               <p className="text-muted-foreground mb-4">
-                Our {name} auto transport service covers all major metro areas including {majorCities.join(", ")}, as well as
+                Our {name} car shipping service covers all major metro areas including {majorCities.join(", ")}, as well as
                 smaller towns and rural communities. Every shipment is fully insured with up to $250,000 in cargo coverage,
-                and our dedicated team provides real-time tracking and updates throughout the shipping process.
+                and our dedicated team provides real-time tracking and updates throughout the car shipping process.
               </p>
               <p className="text-muted-foreground mb-6">
-                Ready to ship your vehicle to or from {name}? Get a free, no-obligation quote in minutes. Our shipping
+                Ready to ship your vehicle to or from {name}? Get a free, no-obligation car shipping quote in minutes. Our shipping
                 advisors are available to answer your questions and help you choose the right transport option for your
                 needs and budget.
               </p>

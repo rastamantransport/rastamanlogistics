@@ -68,7 +68,7 @@ const Services = () => (
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">{s.description}</p>
                 <span className="inline-flex items-center text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                  Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                  Learn more about {s.title} <ArrowRight className="ml-1 w-4 h-4" />
                 </span>
               </Link>
             ))}
