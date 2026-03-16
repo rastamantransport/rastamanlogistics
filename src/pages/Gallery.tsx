@@ -4,14 +4,14 @@ import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import SEOHead from "@/components/SEOHead";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg?format=webp";
-import ferrari308gts from "@/assets/gallery-ferrari-308-gts.jpg?format=webp";
-import chevyC10 from "@/assets/gallery-chevy-c10.jpg?format=webp";
-import fordModelA from "@/assets/gallery-ford-model-a-woody.jpg?format=webp";
-import acuraNsx from "@/assets/gallery-acura-nsx.jpg?format=webp";
-import f1Replica from "@/assets/gallery-f1-replica-art-car.jpg?format=webp";
-import teslaRoadster from "@/assets/gallery-tesla-roadster.jpg?format=webp";
-import vintagePurple from "@/assets/gallery-vintage-purple-classic.jpg?format=webp";
+import porscheGt3rs from "@/assets/gallery-porsche-gt3rs.jpg";
+import ferrari308gts from "@/assets/gallery-ferrari-308-gts.jpg";
+import chevyC10 from "@/assets/gallery-chevy-c10.jpg";
+import fordModelA from "@/assets/gallery-ford-model-a-woody.jpg";
+import acuraNsx from "@/assets/gallery-acura-nsx.jpg";
+import f1Replica from "@/assets/gallery-f1-replica-art-car.jpg";
+import teslaRoadster from "@/assets/gallery-tesla-roadster.jpg";
+import vintagePurple from "@/assets/gallery-vintage-purple-classic.jpg";
 
 const galleryImages = [
   { src: porscheGt3rs, alt: "White Porsche 911 GT3 RS being loaded for secure supercar shipping from Bay Area California to Las Vegas Nevada for SEMA show", caption: "Bay Area, CA → Las Vegas, NV • Porsche 911 GT3 RS • Enclosed supercar transport to SEMA 2026" },
