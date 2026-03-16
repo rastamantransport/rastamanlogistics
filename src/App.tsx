@@ -5,8 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { states } from "@/data/states";
 
-const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
-const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+const Toaster = lazy(() =>
+  import("@/components/ui/toaster").then((m) => ({ default: m.Toaster }))
+);
+const Sonner = lazy(() =>
+  import("@/components/ui/sonner").then((m) => ({ default: m.Toaster }))
+);
 const StickyCallButton = lazy(() => import("./components/StickyCallButton"));
 
 const Index = lazy(() => import("./pages/Index"));
@@ -51,33 +55,33 @@ export const AppRoutes = () => (
     <Route path="/admin/login" element={<AdminLogin />} />
     <Route path="/admin" element={<AdminDashboard />} />
     <Route path="/car-shipping-states" element={<CarShippingStates />} />
-    {/* Explicit state routes — no broad /:stateSlug catch-all */}
     <Route path="/car-shipping/:stateName" element={<StateShipping />} />
+
     {states.map((s) => (
       <Route key={s.slug} path={`/${s.slug}`} element={<StateShipping />} />
     ))}
+
     <Route path="*" element={<NotFound />} />
   </Routes>
 );
 
 const App = () => (
   <HelmetProvider>
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Suspense fallback={null}>
-        <Toaster />
-        <Sonner />
-      </Suspense>
-      <BrowserRouter>
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <AppRoutes />
-        </Suspense>
-        <Suspense fallback={null}>
-          <StickyCallButton />
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <BrowserRouter>
+          <Suspense fallback={<div className="min-h-screen bg-background" />}>
+            <AppRoutes />
+          </Suspense>
+
+          <Suspense fallback={null}>
+            <StickyCallButton />
+            <Toaster />
+            <Sonner />
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   </HelmetProvider>
 );
 
