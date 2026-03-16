@@ -118,7 +118,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Rastaman Logistics <onboarding@resend.dev>',
+        from: 'Rastaman Logistics <info@rastamanlogistics.com>',
         to: ['info@rastamanlogistics.com'],
         reply_to: email,
         subject,
