@@ -5,7 +5,7 @@ const AllStatesLinks = () => (
   <section className="py-16 bg-card">
     <div className="container mx-auto px-4 lg:px-8">
       <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-6 text-center">
-        We Ship To All 50 States
+        We Ship To All 48 Contiguous States
       </h2>
       <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
         Rastaman Logistics offers reliable auto transport to and from every contiguous US state. Click any state to learn more about routes, pricing, and transit times.
