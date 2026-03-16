@@ -170,7 +170,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">Service Area</p>
-                      <p className="text-sm text-muted-foreground">Nationwide — All 50 States</p>
+                      <p className="text-sm text-muted-foreground">Nationwide — 48 Contiguous States</p>
                     </div>
                   </div>
 
