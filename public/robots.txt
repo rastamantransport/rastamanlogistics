@@ -3,3 +3,6 @@ Disallow: /admin
 Disallow: /admin-login
 
 Sitemap: https://rastamanlogistics.com/sitemap.xml
+User-agent: *
+Allow: /
+Sitemap: https://www.rastamanlogistics.com/sitemap.xml
