@@ -74,7 +74,7 @@ const routes = [
   "/car-shipping-wyoming",
 ];
 
-export function prerenderPlugin(): Plugin {
+function prerenderPlugin(): Plugin {
   return {
     name: "vite-prerender-plugin",
     apply: "build",
@@ -132,3 +132,6 @@ export function prerenderPlugin(): Plugin {
     },
   };
 }
+
+export { prerenderPlugin };
+export default prerenderPlugin;
