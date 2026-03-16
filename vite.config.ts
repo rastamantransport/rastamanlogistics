@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { imagetools } from "vite-imagetools";
-import prerenderPlugin from "./vite-prerender-plugin";
 
 export default defineConfig(({ mode }) => ({
   server: {
@@ -17,7 +16,6 @@ export default defineConfig(({ mode }) => ({
     react(),
     imagetools(),
     mode === "development" && componentTagger(),
-    prerenderPlugin(),
   ].filter(Boolean),
   build: {
     target: "esnext",

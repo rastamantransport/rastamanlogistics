@@ -5,7 +5,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 interface QuoteFormProps {
   compact?: boolean;
@@ -23,10 +22,16 @@ const QuoteForm = ({ compact = false }: QuoteFormProps) => {
     formData.forEach((value, key) => { data[key] = value.toString(); });
 
     try {
-      const { error } = await supabase.functions.invoke("send-notification", {
-        body: { type: "quote", data },
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, formType: "quote" }),
       });
-      if (error) throw error;
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.error || "Failed to send");
+
       toast.success("Quote request submitted! We'll contact you shortly.");
       (e.target as HTMLFormElement).reset();
     } catch (err) {
