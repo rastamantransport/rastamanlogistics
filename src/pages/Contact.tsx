@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +41,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Contact Rastaman Logistics | Get a Free Auto Transport Quote"
+        description="Contact Rastaman Logistics for a free car shipping quote or questions about vehicle transport. Call (916) 519-3588 or email info@rastamanlogistics.com. Nationwide service."
+        canonical="https://www.rastamanlogistics.com/contact"
+      />
       <Navbar />
       <main className="pt-16">
         <section className="py-20">
