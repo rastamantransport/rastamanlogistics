@@ -3,7 +3,7 @@ import { Shield, Award, Truck, CheckCircle } from "lucide-react";
 const badges = [
   { icon: Shield, label: "Licensed & Insured", desc: "Fully licensed auto transport broker" },
   { icon: Award, label: "Verified Carriers", desc: "Only vetted, insured carriers" },
-  { icon: Truck, label: "Nationwide Service", desc: "All 50 states covered" },
+  { icon: Truck, label: "Nationwide Service", desc: "48 contiguous states" },
   { icon: CheckCircle, label: "FMCSA Registered", desc: "Federal motor carrier authority" },
 ];
 
