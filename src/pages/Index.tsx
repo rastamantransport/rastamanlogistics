@@ -44,7 +44,7 @@ const Index = () => {
               Nationwide Vehicle Shipping You Can <span className="text-gradient-gold">Trust</span>
             </h1>
             <p className="text-lg text-white/75 mb-8 max-w-lg leading-relaxed">
-              Safe, reliable auto transport across all 50 states. Get connected with vetted carriers and competitive rates — fast.
+              Safe, reliable auto transport across all 48 contiguous states. Get connected with vetted carriers and competitive rates — fast.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/car-shipping-calculator">
