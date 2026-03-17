@@ -11,7 +11,7 @@ interface SEOHeadProps {
   twitterCard?: string;
 }
 
-const DEFAULT_OG_IMAGE = "https://rastamanlogistics.com/og-default.jpg";
+const DEFAULT_OG_IMAGE = "https://www.rastamanlogistics.com/og-image.jpg";
 
 const SEOHead = ({
   title,
@@ -29,11 +29,11 @@ const SEOHead = ({
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
+      <link rel="canonical" href={canonical.replace('https://rastamanlogistics.com', 'https://www.rastamanlogistics.com')} />
       <meta name="robots" content={robots} />
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-      <meta property="og:url" content={canonical} />
+      <meta property="og:url" content={canonical.replace('https://rastamanlogistics.com', 'https://www.rastamanlogistics.com')} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
@@ -45,9 +45,10 @@ const SEOHead = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={resolvedOgImage} />
-      <meta name="twitter:site" content="@RastamanLogist" />
+      {/* <meta name="twitter:site" content="@RastamanLogist" /> */}
     </Helmet>
   );
 };
 
 export default SEOHead;
+
